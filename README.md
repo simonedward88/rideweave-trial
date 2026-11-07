@@ -1,6 +1,14 @@
-# RideWeave v0.5.1 — Zwift-style power-zone colours
+# RideWeave v0.5.2 — More realistic route-aware event pacing
 
 Browser-based cycling coaching trial: https://simonedward88.github.io/rideweave-trial/
+
+## Update in v0.5.2 — event-pace model
+- Corrected the earlier surface-agnostic pace calculation. Event estimates now distinguish **road**, **gravel**, and MTB terrain assumptions; climbing density and steep-climb counts separately reduce expected speeds.
+- The app uses the athlete's available outdoor ride-speed summaries to estimate a broad road-equivalent baseline. When surface metadata is missing, this inference is labelled **illustrative**, not a validated rider-specific prediction.
+- When entered/organiser ascent and smoothed GPX ascent differ materially, the displayed calculation uses the more conservative higher value, shows both, and adds a warning to **verify the actual event route**. This can overestimate climbing if files or routes don't match.
+- The Event strategy view now displays a **route-demand assessment**. Higher physical difficulty does not necessarily mean more elapsed time for a shorter distance.
+- Test scenario matching 12 imported-ride summaries: Bamburgh 101 km / 717 m road ≈ 4.63 h (23.2 km/h moving); Grasmere 65.3 km / 1,380 m conservative gravel scenario ≈ 4.86 h (14.9 km/h moving). **These are not verified event times**. Uncertainties remain large; weather, actual surfaces, stops, fitness, and effort all matter.
+- Weather, fuelling recommendations, workout prescriptions, planned workouts, and private browser-stored athlete data are unchanged. Future implementation should support manual ride surface classification, event-specific pace goals and better physical performance modelling.
 
 ## Update in v0.5.1
 - Planned workout graphs use Zwift-style power colours: Z1 grey, Z2 blue, Z3 green, Z4 yellow, Z5 orange and Z6 red.
