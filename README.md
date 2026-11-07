@@ -1,43 +1,31 @@
-# RideWeave — Cycling Coach & Event Intelligence (trial v0.3)
+# RideWeave — Adaptive Cycling Coaching (trial v0.4)
 
-This repository contains the browser-based RideWeave evaluation application.
+Public browser-based evaluation build: https://simonedward88.github.io/rideweave-trial/
 
-## Launch with GitHub Pages
+## What's new in v0.4
 
-1. Open **Settings → Pages** in this repository.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select branch **main**, folder **/(root)**, then **Save**.
-4. When GitHub reports deployment complete, open:
-   https://simonedward88.github.io/rideweave-trial/
+- Progressive, variable 16-week training calendar rather than identical workouts each week.
+- Foundation, build, specific, taper and transition phases, with every fourth week reduced for recovery.
+- Starter programming for athletes without imported rides, based on stated typical training and available time.
+- Activity-informed baseline for athletes with imported rides; explicit **partial versus complete** training history setting.
+- Imported rides shown as **Recorded** in the training calendar instead of being counted twice.
+- Event dates and priorities affect the plan, recovery and taper; proximity warnings include Bamburgh six days ahead of Dirty Reiver.
+- Browse individual weeks through the 16-week overview, see reasons for changes, and update an activity's RPE.
+- Existing Wahoo / Zwift FIT, TCX and timed GPX file import remains supported.
 
-The site is not live until GitHub Pages has been enabled and deployed.
+The **index.html is self-contained** and contains the importer and training planner JavaScript, so GitHub Pages needs no build step or external JS files.
 
-## What is included
-- Athlete profile, training availability, events and A/B/C event priorities
-- Rolling training plan with rule-based adaptation
-- GPX import and course visualisation
-- Event pacing and fuelling planning
-- Recovery check-ins and conservative symptom screening
-- Manual activity and CSV imports, plus browser-local FIT / FIT.GZ / TCX / timed GPX ride imports
-- Zwift .zwo workout export
-- JSON backup and restore
+## Publishing via GitHub Pages
 
-## Data handling and limitations
-This is a **publicly hosted static trial**, with no login or cloud database. Athlete information entered in the app is stored **only in that browser's localStorage**. Data does not synchronise between devices. Use JSON backup to keep a portable copy and avoid entering sensitive health details on shared devices. Do not upload activity exports or personal GPX files to the public GitHub repository.
+Settings → Pages → Deploy from a branch → **main** / **(root)** → Save.
+When the deployment completes open: https://simonedward88.github.io/rideweave-trial/
 
-**No live Strava or Zwift account connection is included.** The injury and recovery logic is preliminary and must not be treated as a medical diagnosis or clearance to exercise.
+## Data & modelling limitations
 
-## Version
-v0.2 — November 2026. 
+The app has **no account login or cloud database**; your athlete profile, GPX routes, ride summaries and progress stay in the same browser's local storage. Updating the web app does not automatically erase them. Export a JSON backup before significant changes and **do not place athlete backups or private activity files in this public repository**.
 
-## Importing recent Wahoo and Zwift rides (v0.3)
+The coach is an **evaluation prototype**, not medical clearance or a validated predictor. Training volume is estimated from the user's stated baseline and available data. Missing imports are not interpreted as confirmed rest. FTP-based targets are provisional when no recent test confirms them; power-based TSS cannot be reliably inferred from summaries without current FTP and normalized power.
 
-**Wahoo app**: History → select completed ride → three-dot menu → Share activity → Download .fit activity → save the file to your phone. Then open RideWeave → Activity history → Import ride files and choose the file(s).
+The current Zwift .zwo exporter provides an approximate structured workout; its exact interval pattern may not always match the on-screen session description. Inspect it before training.
 
-**Zwift**: Log in at zwift.com/feed on desktop, open an activity and use its gear menu → Download Fit File. Import the downloaded .fit in RideWeave using the same button.
-
-FIT imports retain only a compact summary (date, duration, distance, ascent, average power, HR, cadence and any provided normalized power). Original recording samples and GPS coordinates are not retained. This is not a live API connection. The importer has been tested on a synthetic FIT file; real-world device FIT variants still need trial evaluation.
-
-Recent training hours from imported activities feed the existing rule-based scheduling baseline. Power analysis, training stress and FTP estimation are not yet validated. Check your FTP date and mark it unverified if historical.
-
-**Privacy**: Don't upload your personal FIT files or RideWeave backup into this public repository. Import within the browser instead. Keep your JSON backups privately; browser localStorage can be cleared.
+Wahoo and Zwift **automatic** API syncing are not provided. Imports are manual local files. There is no cloud/device synchronization.
