@@ -1,6 +1,12 @@
-# RideWeave v0.5 — Training zones & coach-led event preparation
+# RideWeave v0.5.1 — Zwift-style power-zone colours
 
 Browser-based cycling coaching trial: https://simonedward88.github.io/rideweave-trial/
+
+## Update in v0.5.1
+- Planned workout graphs use Zwift-style power colours: Z1 grey, Z2 blue, Z3 green, Z4 yellow, Z5 orange and Z6 red.
+- Power-zone boundaries shown in charts follow Zwift's typical six-zone cycling FTP scale (approximately <60%, 60–75%, 76–89%, 90–104%, 105–118%, >118%).
+- A six-zone key appears above the Training calendar for quick reference; workout tooltips display zone numbers.
+- Prescribed interval power and duration, modelled stress points and imported athlete data remain unchanged. Existing local browser data is retained.
 
 ## New in v0.5
 
