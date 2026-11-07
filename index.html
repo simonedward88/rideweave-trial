@@ -24,7 +24,7 @@
   .power-mini{display:block;width:100%;height:46px;min-height:40px;max-height:46px;margin:9px 0 4px;border-radius:4px}
   .zone-legend{display:flex;flex-wrap:wrap;gap:9px 15px;margin:10px 0;font-size:11px;color:#aec9d2}
   .zone-legend span{display:inline-flex;align-items:center;gap:5px}
-  .zone-legend i{display:inline-block;width:10px;height:10px;border-radius:2px}
+  .zone-legend i{display:inline-block;width:10px;height:10px;border-radius:2px}.zone-legend-key{padding:8px 10px;margin:8px 0 14px;background:#142936;border:1px solid #294556;border-radius:8px}.zone-legend-key span{font-size:10px}.zone-legend-key i{width:12px;height:12px;border:1px solid #ffffff24}
   .workload-chip{font-size:10px;color:#c0d8df;background:#1d3c48;padding:5px 8px;border:1px solid #355361;border-radius:6px;display:inline-block;margin-top:6px}
   .plan-load-summary{padding:12px 15px;border:1px solid #3b5a63;border-radius:10px;background:#1d333f;margin:12px 0;color:#bdd5de;font-size:12px}
   .plan-load-summary strong{color:var(--lime);font-size:16px}
@@ -55,7 +55,7 @@
       <div class="sidebar-caption">YOUR WORKSPACE</div>
       <nav id="nav" aria-label="Main navigation"></nav>
       <div class="sidebar-bottom">
-        <div class="product-version"><span class="status-dot"></span> EVALUATION BUILD <b>v0.5</b></div>
+        <div class="product-version"><span class="status-dot"></span> EVALUATION BUILD <b>v0.5.1</b></div>
         <p>Personal, local-first trial. Your data stays in this browser unless you export it.</p>
       </div>
     </aside>
@@ -406,7 +406,7 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const num=(v,def=0)=>Number.isFinite(+v)?+v:def;
 const round=(v,d=0)=>Number(v.toFixed(d));
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const bands=[{key:'Z1',name:'Recovery',color:'#8bb3cb',min:0,max:.55},{key:'Z2',name:'Endurance',color:'#80d4b3',min:.55,max:.75},{key:'Z3',name:'Tempo',color:'#e1d47c',min:.75,max:.90},{key:'Z4',name:'Threshold',color:'#ffb779',min:.90,max:1.05},{key:'Z5',name:'VO₂max',color:'#f18a87',min:1.05,max:1.20},{key:'Z6',name:'Anaerobic',color:'#c898ec',min:1.20,max:9}];
+const bands=[{key:'Z1',name:'Recovery',color:'#AEB8C2',min:0,max:.60},{key:'Z2',name:'Endurance',color:'#369DF5',min:.60,max:.76},{key:'Z3',name:'Tempo',color:'#39CA73',min:.76,max:.90},{key:'Z4',name:'Threshold',color:'#F5D94C',min:.90,max:1.05},{key:'Z5',name:'VO₂max',color:'#FA9938',min:1.05,max:1.19},{key:'Z6',name:'Anaerobic',color:'#F15B56',min:1.19,max:9}];
 const zoneFor=p=>bands.find(x=>p<x.max)||bands[5];
 const variants={
  'Cadence and aerobic control':{sets:6,on:60,power:.68,rest:120,restPower:.57},
@@ -473,12 +473,12 @@ function profile(work,compact=false){
  const x=t=>pad+(w-2*pad)*(t/work.totalSeconds),yy=r=>top+graphH*(1-clamp(r,0,1.22)/1.22);
  let at=0,paths='';
  for(const s of work.segments){const y=yy(s.ratio),x1=x(at),x2=x(at+s.seconds),height=top+graphH-y;
-  paths+=`<rect x="${round(x1,2)}" y="${round(y,2)}" width="${round(Math.max(.4,x2-x1),2)}" height="${round(Math.max(.7,height),2)}" fill="${zoneFor(s.ratio).color}" opacity=".93"><title>${esc(s.name)}: ${Math.round(s.seconds/60*10)/10} min at ${Math.round(s.ratio*100)}% FTP</title></rect>`;at+=s.seconds;}
- const grid=compact?'':[.55,.75,.9,1.05].map(r=>`<line x1="${pad}" x2="${w-pad}" y1="${yy(r)}" y2="${yy(r)}" stroke="#506471" stroke-opacity=".5" stroke-dasharray="3 5"/><text x="3" y="${yy(r)+4}" fill="#90a6b1" font-size="10">${Math.round(r*100)}%</text>`).join('');
+  paths+=`<rect x="${round(x1,2)}" y="${round(y,2)}" width="${round(Math.max(.4,x2-x1),2)}" height="${round(Math.max(.7,height),2)}" fill="${zoneFor(s.ratio).color}" opacity=".93"><title>${zoneFor(s.ratio).key} · ${esc(s.name)}: ${Math.round(s.seconds/60*10)/10} min at ${Math.round(s.ratio*100)}% FTP</title></rect>`;at+=s.seconds;}
+ const grid=compact?'':[.60,.76,.90,1.05,1.19].map(r=>`<line x1="${pad}" x2="${w-pad}" y1="${yy(r)}" y2="${yy(r)}" stroke="#506471" stroke-opacity=".5" stroke-dasharray="3 5"/><text x="3" y="${yy(r)+4}" fill="#90a6b1" font-size="10">${Math.round(r*100)}%</text>`).join('');
  const labels=compact?'':`<text x="${pad}" y="${h-9}" fill="#91aebb" font-size="11">0 min</text><text x="${w/2}" y="${h-9}" text-anchor="middle" fill="#91aebb" font-size="11">${Math.round(work.minutes/2)} min</text><text x="${w-pad}" y="${h-9}" text-anchor="end" fill="#91aebb" font-size="11">${work.minutes} min</text>`;
  return `<svg class="${compact?'power-mini':'power-profile'}" viewBox="0 0 ${w} ${h}" role="img" aria-label="Planned workout power intensity versus time, colour coded by training zone" preserveAspectRatio="none"><rect x="${pad}" y="${top}" width="${w-2*pad}" height="${graphH}" rx="3" fill="#122331"/>${grid}${paths}${labels}</svg>`;
 }
-function zoneLegend(work){return `<div class="zone-legend">${work.zones.filter(z=>z.seconds>=15).map(z=>`<span><i style="background:${z.color}"></i><b>${z.key}</b> ${Math.round(z.seconds/60)}m</span>`).join('')}</div>`}
+function zoneLegend(work,showKey=false){const zones=showKey?bands:work?.zones.filter(z=>z.seconds>=15)||[];return `<div class="zone-legend ${showKey?'zone-legend-key':''}" aria-label="Zwift-style cycling power zones">${zones.map(z=>`<span><i style="background:${z.color}"></i><b>${z.key}</b> ${showKey?esc(z.name):Math.round(z.seconds/60)+'m'}</span>`).join('')}</div>`}
 function zwo(session,work){if(!work)return null;const xml=s=>String(s||'').replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]));return `<?xml version="1.0" encoding="UTF-8"?><workout_file><author>RideWeave</author><name>${xml(session.title)}</name><description>${xml(session.desc)}. Power percentages follow the workout graph. FTP is provisional unless verified.</description><sportType>bike</sportType><tags><tag name="RideWeave"/></tags><workout>${work.segments.map(s=>`<SteadyState Duration="${s.seconds}" Power="${s.ratio}"/>`).join('')}</workout></workout_file>`;}
 function practice(session,weekIndex,activities=[]){
  if(!session||session.type!=='Long'||session.minutes<80)return null;
@@ -738,6 +738,7 @@ function training(){
  ${wp.warnings.map(x=>`<div class="muted-note warn-note section-space">${e(x)}</div>`).join('')}
  ${action('Review imported rides','activities','secondary small')}</section>
  <section class="panel section-space"><div class="panel-heading"><div><h2>Training calendar</h2><p>Week of ${fmtDate(wp.start)} · ${e(wp.focus)} · ${e(wp.theme)}</p></div><div class="week-controls"><button class="btn small ghost" data-act="prevweek">← Previous</button><button class="btn small secondary" data-act="thisweek">Today</button><button class="btn small ghost" data-act="nextweek">Next →</button></div></div>
+ ${RideWeaveWorkouts.zoneLegend(null,true)}
  <div class="schedule">${wp.sessions.map(s=>{const log=state.logs[s.date],w=RideWeaveWorkouts.make(s,state.athlete),f=RideWeaveWorkouts.practice(s,wp.weekIndex,state.activities);return `<div class="daycard ${s.date===iso(NOW())?'today':''}"><div class="daycard-head"><strong>${DAY[(fromISO(s.date).getDay()+6)%7]}</strong><span>${fromISO(s.date).getDate()} ${month(s.date).toLowerCase()}</span></div><div class="daycard-title"><span class="type-dot ${e(s.type)}"></span>${e(s.title)}</div><div class="daycard-detail">${s.minutes} min · ${e(s.zone)}<div style="margin-top:6px">${e(s.desc)}</div></div>${w?`<div class="workload-chip">${w.stress} ${w.ftpCurrent?'estimated TSS':'provisional stress pts'}</div>${RideWeaveWorkouts.profile(w,true)}${f?`<div class="tiny">Fuel practice ${f.gramsPerHour} g/h</div>`:''}`:''}<div class="daycard-footer">${s.recorded?'<span class="badge green">Imported actual</span>':log?`<span class="badge ${log==='done'?'green':'warn'}">${log==='done'?'Completed':'Missed'}</span>`:`${s.type!=='Rest'?`<button class="micro" data-act="workout" data-date="${s.date}">Details</button>`:''}`}</div></div>`}).join('')}</div>
  <div class="btnrow section-space">${action('Rebalance remaining week','rebalance','secondary small')}${action('Edit availability','athlete','ghost small')}${action('Export plan CSV','exportplan','ghost small')}</div>
  ${health.level==='danger'?'<div class="muted-note danger-note section-space">Safety screening paused training recommendations. Seek appropriate clinical support.</div>':health.level==='warn'?`<div class="muted-note warn-note section-space">${e(health.reason)}</div>`:''}
