@@ -25,10 +25,10 @@ function decodeFIT(buf,filename){
      if(t===7){let end=pos;while(end<pos+size&&bytes[end]!==0)end++;return new TextDecoder('utf-8',{fatal:false}).decode(bytes.subarray(pos,end));}
      if(t===0||t===2||t===10||t===13){let v=dv.getUint8(pos);return v===255?null:v;}
      if(t===1){let v=dv.getInt8(pos);return v===127?null:v;}
-     if(t===3||t===11){if(size<2)return null;let v=dv.getUint16(pos,little);return v===65535?null:v;}
-     if(t===4){if(size<2)return null;let v=dv.getInt16(pos,little);return v===32767?null:v;}
-     if(t===5||t===12){if(size<4)return null;let v=dv.getUint32(pos,little);return v===4294967295?null:v;}
-     if(t===6){if(size<4)return null;let v=dv.getInt32(pos,little);return v===2147483647?null:v;}
+     if(t===3){if(size<2)return null;let v=dv.getInt16(pos,little);return v===32767?null:v;}
+     if(t===4||t===11){if(size<2)return null;let v=dv.getUint16(pos,little);return v===65535?null:v;}
+     if(t===5){if(size<4)return null;let v=dv.getInt32(pos,little);return v===2147483647?null:v;}
+     if(t===6||t===12){if(size<4)return null;let v=dv.getUint32(pos,little);return v===4294967295?null:v;}
      if(t===8){if(size<4)return null;let v=dv.getFloat32(pos,little);return Number.isFinite(v)?v:null;}
      if(t===9){if(size<8)return null;let v=dv.getFloat64(pos,little);return Number.isFinite(v)?v:null;}
    }catch(err){return null}
