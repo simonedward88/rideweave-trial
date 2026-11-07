@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0b121b" />
   <title>RideWeave | Cycling coaching & event intelligence</title>
+  <style>
+  .plan-insights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}
+  .plan-insight{background:#172d38;border:1px solid #345060;border-radius:12px;padding:14px}
+  .plan-insight b{color:#dcf5e5;display:block;margin-top:5px;font-size:14px}
+  .roadmap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .roadmap-button{background:#172b38;border:1px solid #344b58;color:#d8eaf1;padding:12px;border-radius:10px;text-align:left;cursor:pointer;width:100%}
+  .roadmap-button:hover{border-color:var(--lime)}
+  .roadmap-button.selected{border-color:var(--lime);background:#294037}
+  .roadmap-button strong{display:block;font-size:12px}
+  .roadmap-button small{display:block;color:#98b6c3;font-size:11px;margin-top:4px;line-height:1.5}
+  .load-help{font-size:11px;color:#abc4cc;line-height:1.65}
+  @media(max-width:750px){.plan-insights,.roadmap{grid-template-columns:1fr}}
+  </style>
   <style>:root{--bg:#0b121b;--sidebar:#0c151e;--surface:#101d29;--card:#152330;--card2:#1a2b38;--stroke:#2b3c49;--muted:#8ba2b1;--muted2:#657e90;--white:#f0f7f8;--lime:#c2f477;--lime-dark:#a3d75c;--blue:#7ccdf0;--orange:#ffbc75;--red:#fa9188;--green:#91d4bd;--shadow:0 12px 50px rgba(0,0,0,.19)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.48}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}a{color:var(--blue)}.shell{min-height:100vh;display:grid;grid-template-columns:246px minmax(0,1fr)}.sidebar{background:var(--sidebar);border-right:1px solid #263744;position:sticky;top:0;height:100vh;padding:26px 16px;display:flex;flex-direction:column;z-index:20}.brand{display:flex;align-items:center;gap:11px;color:var(--white);text-decoration:none;padding:6px 10px 22px}.brandmark{background:var(--lime);color:#0b151c;font-size:18px;font-weight:950;width:42px;height:42px;display:grid;place-items:center;border-radius:13px;letter-spacing:-2px}.brandmark span{font-size:20px;opacity:.6}.brand strong{font-size:17px;letter-spacing:.7px}.brand .brand-light{font-weight:350}.brand small{display:block;font-size:8px;letter-spacing:2px;color:var(--muted);margin-top:1px}.sidebar-caption{color:#628294;font-size:10px;font-weight:700;letter-spacing:1.6px;margin:19px 11px 13px}.nav-link{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;color:#a7bdc7;border-radius:11px;text-decoration:none;text-align:left;padding:13px 12px;margin-bottom:5px;font-weight:580}.nav-link:hover{background:#192a36;color:#fff}.nav-link.active{background:#263e3c;color:var(--lime)}.nav-ico{width:21px;text-align:center;font-size:18px;line-height:1}.nav-count{margin-left:auto;background:#334735;padding:2px 7px;border-radius:20px;font-size:10px}.sidebar-bottom{margin-top:auto;padding:18px 8px 6px;color:var(--muted2)}.sidebar-bottom p{font-size:11px;line-height:1.5;margin-bottom:0}.product-version{font-size:10px;letter-spacing:.8px;color:#b6c9d1}.product-version b{color:#e8f4f5;font-weight:500}.status-dot{display:inline-block;background:var(--lime);width:7px;height:7px;border-radius:50%;margin-right:6px}.content-area{min-width:0}.topbar{height:75px;border-bottom:1px solid #253543;display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;background:rgba(11,18,27,.96);backdrop-filter:blur(10px);z-index:10}.breadcrumb{font-weight:700;color:var(--white)}.breadcrumb span{font-weight:400;color:var(--muted)}.top-actions{display:flex;align-items:center;gap:14px}.topdate{font-size:12px;color:var(--muted)}.user-avatar{display:grid;place-items:center;width:35px;height:35px;background:#3d584c;border:1px solid #6c9f75;border-radius:50%;font-weight:700;color:var(--lime)}.menu-toggle{display:none;color:#fff;background:none;border:0;font-size:23px}main{max-width:1510px;padding:36px 34px 84px;margin:auto}.eyebrow{color:var(--lime);font-size:11px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin:0 0 8px}.h1{font-size:clamp(25px,3.1vw,38px);line-height:1.16;margin:0 0 10px;font-weight:710;letter-spacing:-1.2px}.subtitle{font-size:14px;color:var(--muted);margin:0 0 26px;max-width:850px;line-height:1.7}.layout{display:grid;gap:18px}.cols2{grid-template-columns:1.48fr 1fr}.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}.panel{background:var(--surface);border:1px solid var(--stroke);border-radius:17px;padding:22px;min-width:0}.panel-inner{background:var(--card);border:1px solid #2a4050;border-radius:12px;padding:16px}.panel-heading{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:17px}.panel-heading h2{font-size:17px;margin:0;font-weight:660;letter-spacing:-.3px}.panel-heading p{color:var(--muted);font-size:12px;margin:3px 0 0}.subhead{font-size:14px;font-weight:700;letter-spacing:-.2px;margin:16px 0 9px}.stat{border:1px solid var(--stroke);border-radius:15px;background:var(--surface);padding:20px;min-width:0}.stat-label{font-size:11px;font-weight:650;color:var(--muted);letter-spacing:.4px}.stat-value{font-size:29px;letter-spacing:-1px;font-weight:740;margin-top:11px;line-height:1.1}.stat-unit{font-size:12px;margin-left:5px;color:var(--muted);font-weight:400}.stat-note{font-size:11px;color:var(--muted2);margin-top:9px}.highlight{color:var(--lime)}.sky{color:var(--blue)}.amber{color:var(--orange)}.hero{padding:28px;border-radius:20px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 90% 20%,#365b49 0,#1b3332 38%,#142b32 65%,#13202d 100%);border:1px solid #3d5a4f;display:flex;align-items:center;gap:24px;justify-content:space-between}.hero::after{content:"";position:absolute;right:210px;top:-20px;width:340px;height:230px;border:1px solid #4b796a55;border-radius:50%;transform:rotate(-40deg);pointer-events:none}.hero h2{font-size:clamp(23px,3vw,35px);margin:5px 0 12px;letter-spacing:-1px;max-width:640px}.hero p{color:#c0d5d1;max-width:640px;margin:0 0 20px}.hero-aside{min-width:130px;text-align:center;background:#112629aa;padding:17px;border:1px solid #56786588;border-radius:15px}.hero-days{font-size:43px;line-height:1;font-weight:750;color:var(--lime)}.hero-aside small{display:block;font-size:12px;color:#afc7bc;margin-top:6px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:10px;padding:11px 15px;background:var(--lime);color:#11201a;font-weight:720;text-decoration:none;transition:background .15s,transform .12s;font-size:12.5px}.btn:hover{background:#d7ffaa;transform:translateY(-1px)}.btn.secondary{background:#263c47;color:#e2f2f0;border-color:#3d5862}.btn.secondary:hover{background:#304f5d}.btn.danger{background:#482c36;color:#ffd0cc;border-color:#7a414b}.btn.ghost,.ghost-btn{background:transparent;color:#bdd5de;border:1px solid #385160}.btn.ghost:hover,.ghost-btn:hover{background:#1c3341}.btn.small,.ghost-btn.small{font-size:11px;padding:8px 11px;border-radius:8px}.btnrow{display:flex;align-items:center;flex-wrap:wrap;gap:8px}.tiny{font-size:11px;color:var(--muted)}.muted{color:var(--muted)}.badge{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;border-radius:50px;font-size:10px;font-weight:750;letter-spacing:.25px;padding:5px 9px;background:#263b46;color:#b8d5db}.badge.A{background:#35533b;color:#c7f69b}.badge.B{background:#254658;color:#9bdcf8}.badge.C{background:#3a394b;color:#d8cafb}.badge.warn{background:#513c2b;color:#ffd19b}.badge.red{background:#533137;color:#ffc4be}.badge.green{background:#24483c;color:#b4efce}.event-row{display:flex;align-items:center;gap:14px;padding:15px 0;border-top:1px solid #2b3d49}.event-row:first-child{border-top:0}.date-tile{display:grid;place-items:center;background:#203542;border-radius:11px;min-width:60px;height:60px;gap:0}.date-tile small{color:#90a7b5;font-weight:700;font-size:10px}.date-tile strong{font-size:22px;line-height:1}.event-main{min-width:0;flex:1}.event-name{font-weight:690;font-size:14px}.event-meta{color:var(--muted);font-size:11px;margin-top:4px}.event-desc{font-size:12px;color:#a7c0ca;margin:7px 0 0}.divider{border-top:1px solid var(--stroke);margin:18px 0}.big-number{font-size:38px;line-height:1.1;font-weight:740;letter-spacing:-1px}.meta-line{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0;color:var(--muted);font-size:12px}.meta-line b{color:#e6f2f5;font-weight:600}.progress{height:8px;background:#2d404a;border-radius:20px;overflow:hidden}.progress>span{display:block;height:100%;background:var(--lime);border-radius:20px}.mini-bars{display:flex;gap:5px;align-items:end;height:68px;padding-top:12px}.mini-bars span{flex:1;border-radius:4px 4px 2px 2px;background:#396078;min-height:3px}.mini-bars span.current{background:var(--lime)}.workout{padding:14px 0;border-bottom:1px solid #2a3d4a;display:flex;gap:12px;align-items:center}.workout:last-child{border:0}.daychip{min-width:50px;text-align:center;padding:7px 8px;background:#233946;border-radius:9px;color:#d1e1e6;font-size:11px}.daychip strong{display:block;font-size:13px}.workout-main{flex:1;min-width:0}.workout-title{font-weight:700}.workout-description{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.5}.type-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;background:var(--blue)}.type-dot.Hard{background:var(--orange)}.type-dot.Long{background:var(--lime)}.type-dot.Rest{background:#5d7888}.type-dot.Event{background:#cdb7ff}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.form-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.field{display:flex;flex-direction:column;gap:6px;min-width:0}.field label{font-size:11px;color:#acc4cd;font-weight:650}.field input,.field select,.field textarea{width:100%;padding:11px 12px;background:#0d1b27;color:var(--white);border:1px solid #344c5d;border-radius:9px;outline:none;min-height:42px}.field textarea{resize:vertical;min-height:72px}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--lime)}.field input[type=range]{min-height:auto}.checkline{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:12px}.checkline input{accent-color:var(--lime)}.muted-note{padding:12px 14px;background:#1c3040;border-left:3px solid var(--blue);border-radius:7px;font-size:12px;color:#bcd5db;line-height:1.6}.warn-note{border-color:var(--orange);background:#322c25;color:#edcba4}.danger-note{border-color:var(--red);background:#37262b;color:#ffccc8}.success-note{border-color:var(--green);background:#1f352e;color:#bfebd6}.tabs{display:flex;gap:5px;flex-wrap:wrap;border-bottom:1px solid var(--stroke);margin:0 0 18px;padding-bottom:12px}.tab{padding:8px 13px;border:1px solid transparent;background:none;color:var(--muted);border-radius:8px;font-size:12px}.tab.active{color:var(--lime);background:#284038;border-color:#3d6953}.schedule{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}.daycard{border:1px solid #304653;background:#172937;border-radius:10px;padding:12px;min-height:172px;position:relative;overflow:hidden}.daycard.today{border-color:var(--lime)}.daycard-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:11px;color:var(--muted)}.daycard-head strong{color:var(--white);font-size:13px}.daycard-title{font-size:12px;font-weight:750;margin-bottom:8px;line-height:1.3}.daycard-detail{font-size:10.5px;color:#a3bbc6;line-height:1.55}.daycard .badge{margin-top:8px}.daycard-footer{margin-top:9px;display:flex;gap:5px;flex-wrap:wrap}.micro{border:1px solid #3b5663;border-radius:5px;background:#28404e;color:#d2e9ef;padding:4px 6px;font-size:10px;font-weight:700}.micro.done{border-color:#3e8056;background:#264c3e;color:#b2f2c2}.micro.skipped{background:#422c34;border-color:#77434a;color:#ffb9ae}.horizontal-scroller{overflow-x:auto}.week-controls{display:flex;align-items:center;gap:12px}.canvas-box{background:#0b1a28;border:1px solid #2c4555;border-radius:12px;overflow:hidden;position:relative}.chart-canvas{display:block;width:100%;height:188px}.map-canvas{display:block;width:100%;height:320px}.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:10px;color:var(--muted);margin-top:10px}.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px}.seg-list{display:grid;gap:9px;margin-top:13px}.sector{display:grid;grid-template-columns:90px 1fr auto;gap:12px;align-items:center;border:1px solid #2d4352;background:#172a37;border-radius:10px;padding:12px;color:#d6e9ed;text-align:left;width:100%}.sector.selected{border-color:var(--lime);background:#2a413b}.sector h4{margin:0;font-size:12px}.sector p{color:var(--muted);font-size:11px;margin:4px 0 0}.sector .km{font-size:11px;color:var(--blue)}.empty{padding:22px;border:1px dashed #445764;border-radius:12px;text-align:center;color:var(--muted)}.empty h3{color:#d2e4e9;margin:7px 0}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:540px;font-size:12px}th{text-align:left;font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:#8ca6b7;font-weight:700;padding:11px;border-bottom:1px solid var(--stroke)}td{padding:12px 11px;border-bottom:1px solid #273d49;vertical-align:top}td strong{font-weight:650}.pill{display:inline-flex;padding:4px 7px;border:1px solid #456172;color:#c5d9e2;border-radius:5px;font-size:11px}.health-screen{display:flex;align-items:center;gap:15px;padding:16px;background:#293a39;border:1px solid #466554;border-radius:12px;margin-bottom:15px}.health-screen.warn{background:#342e25;border-color:#82613b}.health-screen.danger{background:#41292d;border-color:#a25961}.health-icon{font-size:27px}.health-screen strong{font-size:15px}.health-screen p{font-size:12px;color:#c2d1d1;margin:4px 0 0}.range-row{display:flex;gap:10px;align-items:center}.range-row input{flex:1}.range-row output{width:30px;text-align:right;color:var(--lime);font-weight:800}.step-list{display:grid;gap:10px;counter-reset:steps}.step{display:flex;gap:12px}.step b{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#385345;color:var(--lime);flex-shrink:0}.step p{margin:0;color:#b4ced5;font-size:12px;line-height:1.6}.note-icon{font-size:13px}.modal-backdrop{position:fixed;inset:0;background:#040a0bc9;display:grid;place-items:center;padding:20px;z-index:80}.modal{width:min(600px,96vw);max-height:90vh;overflow:auto;background:#142532;border:1px solid #49616e;border-radius:18px;padding:26px;box-shadow:0 25px 100px #000a}.modal-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.modal-heading h2{margin:0;font-size:19px}.close{background:none;color:#c7d8df;border:0;font-size:24px}.toast{position:fixed;right:22px;bottom:22px;background:#d5f8b9;color:#1a2d19;box-shadow:var(--shadow);padding:13px 18px;border-radius:11px;font-weight:750;transform:translateY(100px);opacity:0;transition:all .25s;z-index:90;max-width:360px}.toast.show{transform:translateY(0);opacity:1}.footnote{color:#698391;font-size:10px;margin-top:13px;line-height:1.6}.kpi-tag{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}.chart-tooltip{position:absolute;pointer-events:none;background:#273b45;color:#f0f7f8;border:1px solid #73909e;border-radius:5px;padding:5px 8px;font-size:11px;display:none;z-index:3}.two-pane{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}.check-card{padding:13px;background:#1a2e38;border:1px solid #3d5360;border-radius:9px}.check-card label{display:flex;align-items:start;gap:8px;font-size:12px}.check-card input{accent-color:var(--lime);margin-top:3px}.help-copy{font-size:12px;line-height:1.75;color:#aac3cc}.inline-edit{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.text-link{border:0;background:none;color:var(--blue);text-decoration:underline;padding:0;cursor:pointer}.timeline-marker{background:#203845;color:#e7f2f4;border-radius:7px;padding:5px 8px;font-size:11px}.range-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.range-strip span{height:7px;background:#33515d;border-radius:5px}.range-strip span.on{background:var(--lime)}.section-space{margin-top:20px}.modal hr{border:0;border-top:1px solid #3a4d57;margin:22px 0}.callout{background:#203640;border:1px solid #45626e;border-radius:12px;padding:16px}.callout strong{color:var(--lime)}.intro-row{display:flex;gap:14px;align-items:center}.empty-graphic{width:58px;height:58px;background:#263c4a;border-radius:17px;display:grid;place-items:center;font-size:26px;margin:auto}
 @media(max-width:1180px){.schedule{grid-template-columns:repeat(4,1fr)}.cols4{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:870px){.shell{display:block}.sidebar{position:fixed;left:0;top:0;transform:translateX(-100%);transition:transform .22s;width:260px;box-shadow:30px 0 65px #0008}.sidebar.open{transform:none}.menu-toggle{display:block}.topbar{padding:0 16px}.topdate{display:none}.breadcrumb{margin-right:auto;margin-left:12px}main{padding:25px 15px 80px}.cols2,.two-pane{grid-template-columns:1fr}.schedule{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{flex-wrap:wrap}.hero-aside{min-width:100px}.panel{padding:16px}}@media(max-width:540px){.cols3{grid-template-columns:1fr}.cols4{grid-template-columns:repeat(2,minmax(0,1fr))}.stat{padding:14px}.stat-value{font-size:24px}.form-grid,.form-grid.three{grid-template-columns:1fr}.schedule{grid-template-columns:1fr 1fr}.daycard{min-height:155px;padding:10px}.top-actions .ghost-btn{display:none}.event-row{gap:10px}.date-tile{min-width:52px}.hero{padding:21px}.panel-heading{align-items:flex-start}.panel-heading h2{font-size:15px}.sector{grid-template-columns:64px 1fr}.sector>span:last-child{display:none}.modal{padding:20px}}
@@ -18,7 +31,7 @@
       <div class="sidebar-caption">YOUR WORKSPACE</div>
       <nav id="nav" aria-label="Main navigation"></nav>
       <div class="sidebar-bottom">
-        <div class="product-version"><span class="status-dot"></span> EVALUATION BUILD <b>v0.3</b></div>
+        <div class="product-version"><span class="status-dot"></span> EVALUATION BUILD <b>v0.4</b></div>
         <p>Personal, local-first trial. Your data stays in this browser unless you export it.</p>
       </div>
     </aside>
@@ -36,8 +49,331 @@
   <input type="file" id="activityCsvFile" accept=".csv,text/csv" hidden />
   <input type="file" id="activityRideFiles" accept=".fit,.fit.gz,.tcx,.gpx" multiple hidden />
   <input type="file" id="backupFile" accept=".json,application/json" hidden />
-  <script src="./ride-import.js"></script>
-  <script>/* RideWeave v0.3 — local-first evaluation application.
+  <script>
+/* RideWeave local activity-file importer: works entirely in the browser.
+   FIT/TCX/GPX files are parsed locally; this module does not upload raw files. */
+(()=>{
+'use strict';
+const FIT_EPOCH=631065600;
+const num=x=>Number.isFinite(Number(x))?Number(x):null;
+const clean=s=>String(s||'').replace(/[<>]/g,'').slice(0,140);
+const dateISO=seconds=>Number.isFinite(seconds)&&seconds>631065600&&seconds<4102444800?new Date(seconds*1000).toISOString():null;
+const result=(filename,when,minutes,km,ascent,power,hr,cadence,extras={})=>{
+ if(!when||!Number.isFinite(minutes)||minutes<1||minutes>5000)throw Error('No usable ride date or duration in '+filename);
+ if(!Number.isFinite(km)||km<0||km>1500)km=0;
+ return {date:when.slice(0,10),startTime:when,title:clean(filename.replace(/\.(fit(\.gz)?|tcx|gpx)$/i,'').replace(/[_-]/g,' '))||'Imported ride',duration:Math.round(minutes),distance:Math.round(km*10)/10,ascent:Number.isFinite(ascent)?Math.max(0,Math.round(ascent)):0,power:Number.isFinite(power)?Math.max(0,Math.round(power)):0,avgHr:Number.isFinite(hr)?Math.max(0,Math.round(hr)):0,cadence:Number.isFinite(cadence)?Math.max(0,Math.round(cadence)):0,rpe:0,source:extras.source||'Activity file', ...extras};
+};
+const utc=fitTime=>dateISO(FIT_EPOCH+fitTime);
+function decodeFIT(buf,filename){
+ const dv=new DataView(buf),bytes=new Uint8Array(buf);
+ if(bytes.length<14)throw Error('FIT file is too short');
+ const header=bytes[0],dataSize=dv.getUint32(4,true),dataEnd=header+dataSize;
+ if(header<12||header>64||String.fromCharCode(...bytes.slice(8,12))!=='.FIT'||dataEnd>bytes.length)throw Error('Invalid or incomplete FIT file');
+ let p=header,defs={},sessions=[],firstTime=null,lastTime=null,firstRecord=null,lastRecord=null,sumP=0,ctP=0,sumH=0,ctH=0,sumCad=0,ctCad=0,trackDistance=null,trackAlt=null,trackAscent=0,trackLastAlt=null,records=0,activitySport=null,lastFitTimestamp=null;
+ const primitive=(pos,size,type,little)=>{
+   if(!size)return null;
+   const t=type&31;
+   try{
+     if(t===7){let end=pos;while(end<pos+size&&bytes[end]!==0)end++;return new TextDecoder('utf-8',{fatal:false}).decode(bytes.subarray(pos,end));}
+     if(t===0||t===2||t===10||t===13){let v=dv.getUint8(pos);return v===255?null:v;}
+     if(t===1){let v=dv.getInt8(pos);return v===127?null:v;}
+     if(t===3){if(size<2)return null;let v=dv.getInt16(pos,little);return v===32767?null:v;}
+     if(t===4||t===11){if(size<2)return null;let v=dv.getUint16(pos,little);return v===65535?null:v;}
+     if(t===5){if(size<4)return null;let v=dv.getInt32(pos,little);return v===2147483647?null:v;}
+     if(t===6||t===12){if(size<4)return null;let v=dv.getUint32(pos,little);return v===4294967295?null:v;}
+     if(t===8){if(size<4)return null;let v=dv.getFloat32(pos,little);return Number.isFinite(v)?v:null;}
+     if(t===9){if(size<8)return null;let v=dv.getFloat64(pos,little);return Number.isFinite(v)?v:null;}
+   }catch(err){return null}
+   return null;
+ };
+ while(p<dataEnd){
+   const h=bytes[p++],compressed=!!(h&128),local=compressed?(h>>5)&3:h&15;
+   if(!compressed&&(h&64)){
+     if(p+5>dataEnd)throw Error('Truncated FIT definition');
+     p++;const little=bytes[p++]===0,global=dv.getUint16(p,little);p+=2;
+     const n=bytes[p++],fields=[];if(n>100)throw Error('Invalid FIT field definition');
+     if(p+3*n>dataEnd)throw Error('Truncated FIT definition fields');
+     for(let i=0;i<n;i++){fields.push([bytes[p],bytes[p+1],bytes[p+2]]);p+=3;}
+     const dev=[];
+     if(h&32){if(p>=dataEnd)throw Error('Truncated FIT developer fields');let nDev=bytes[p++];if(p+3*nDev>dataEnd)throw Error('Truncated FIT developer field');for(let i=0;i<nDev;i++){dev.push(bytes[p+1]);p+=3;}}
+     defs[local]={global,fields,dev,little};continue;
+   }
+   const def=defs[local];if(!def)throw Error('FIT data message without definition');
+   let obj={};for(let f of def.fields){let [id,len,t]=f;if(p+len>dataEnd)throw Error('Truncated FIT data field');obj[id]=primitive(p,len,t,def.little);p+=len;}
+   for(let len of def.dev){if(p+len>dataEnd)throw Error('Truncated FIT developer data');p+=len;}
+   if(compressed){let offset=h&31;if(lastFitTimestamp!==null){let ts=(lastFitTimestamp&~31)+offset;if(ts<lastFitTimestamp)ts+=32;lastFitTimestamp=ts;if(obj[253]==null)obj[253]=ts;}}
+   if(Number.isFinite(obj[253]))lastFitTimestamp=obj[253];
+   if(def.global===18){sessions.push(obj);if(obj[5]!=null)activitySport=obj[5];}
+   if(def.global===20){
+     records++;
+     if(obj[253]!=null){if(firstRecord===null)firstRecord=obj[253];lastRecord=obj[253];}
+     if(obj[7]!=null&&obj[7]>=0&&obj[7]<3000){sumP+=obj[7];ctP++;}
+     if(obj[3]!=null&&obj[3]>0&&obj[3]<255){sumH+=obj[3];ctH++;}
+     if(obj[4]!=null&&obj[4]>=0&&obj[4]<255){sumCad+=obj[4];ctCad++;}
+     if(obj[5]!=null)trackDistance=obj[5]/100/1000;
+     let alt=obj[78]!=null?obj[78]/5-500:obj[2]!=null?obj[2]/5-500:null;
+     if(alt!=null&&alt>-500&&alt<12000){trackAlt=alt;if(trackLastAlt!==null){let d=alt-trackLastAlt;if(d>1&&d<25)trackAscent+=d;}trackLastAlt=alt;}
+   }
+ }
+ if(activitySport!==null&&activitySport!==2)throw Error('FIT activity does not appear to be cycling');
+ const s=sessions.length?sessions.reduce((best,x)=>Number(x[8]||0)>Number(best[8]||0)?x:best,sessions[0]):{};
+ const start=s[2]??firstRecord??s[253],finish=lastRecord??s[253];
+ let secs=(s[8]!=null?s[8]:s[7]!=null?s[7]:null);secs=secs!==null?secs/1000:finish!=null&&start!=null?finish-start:null;
+ const km=s[9]!=null?s[9]/100/1000:trackDistance;
+ const power=s[20]!=null?s[20]:ctP?sumP/ctP:null;
+ const hr=s[16]!=null?s[16]:ctH?sumH/ctH:null;
+ const cadence=s[18]!=null?s[18]:ctCad?sumCad/ctCad:null;
+ const ascent=s[22]!=null?s[22]:trackAscent;
+ return result(filename,utc(start),secs/60,km,ascent,power,hr,cadence,{source:'FIT file',records,normalizedPower:s[34]??null,elapsedMinutes:s[7]!=null?Math.round(s[7]/60000):null});
+}
+function xmlDoc(content){let doc=new DOMParser().parseFromString(content,'application/xml');if(doc.querySelector('parsererror'))throw Error('Invalid XML ride file');return doc;}
+const elems=(root,name)=>[...root.getElementsByTagName('*')].filter(x=>x.localName===name);
+const child=(root,name)=>elems(root,name)[0]||null;
+const value=(root,name)=>{let x=child(root,name);return x?num(x.textContent):null;};
+function geo(a,b){const r=Math.PI/180,dlat=(b[0]-a[0])*r,dlong=(b[1]-a[1])*r,x=Math.sin(dlat/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dlong/2)**2;return 12742*Math.atan2(Math.sqrt(x),Math.sqrt(Math.max(0,1-x)));}
+function decodeXML(content,filename,isGPX){
+ let doc=xmlDoc(content),points=isGPX?elems(doc,'trkpt'):elems(doc,'Trackpoint');
+ if(points.length<2)throw Error('No completed activity trackpoints found');
+ let when=null,end=null,dist=0,ascent=0,lastAlt=null,lastCoord=null,lastKnownDistance=null,powers=[],hrs=[],cads=[];
+ for(let p of points){let t=child(p,isGPX?'time':'Time')?.textContent||null,ts=t?new Date(t).getTime():NaN;
+   if(Number.isFinite(ts)){if(when===null)when=ts;end=ts;}
+   let coord;
+   if(isGPX){let a=num(p.getAttribute('lat')),b=num(p.getAttribute('lon'));if(a!=null&&b!=null)coord=[a,b];}
+   else {let pos=child(p,'Position');let a=pos?value(pos,'LatitudeDegrees'):null,b=pos?value(pos,'LongitudeDegrees'):null;if(a!=null&&b!=null)coord=[a,b];}
+   if(coord&&lastCoord)dist+=geo(lastCoord,coord);if(coord)lastCoord=coord;
+   let d=value(p,'DistanceMeters');if(d!=null)lastKnownDistance=d/1000;
+   let h=value(p,isGPX?'ele':'AltitudeMeters');if(h!=null){if(lastAlt!==null){let delta=h-lastAlt;if(delta>1&&delta<25)ascent+=delta;}lastAlt=h;}
+   let pow=value(p,'Watts')??value(p,'power');if(pow!=null&&pow>=0&&pow<3000)powers.push(pow);
+   let hrTag=child(p,'HeartRateBpm');let hr=hrTag?value(hrTag,'Value'):null;if(hr!=null&&hr>0)hrs.push(hr);
+   let cad=value(p,'Cadence');if(cad!=null)cads.push(cad);
+ }
+ if(when===null||end===null||end-when<60000)throw Error('This appears to be a route, not a recorded timed ride');
+ let duration=(end-when)/60000;
+ if(!isGPX){let laps=elems(doc,'Lap');let sum=0,sumDist=0;for(let lap of laps){let t=value(lap,'TotalTimeSeconds'),d=value(lap,'DistanceMeters');if(t!=null)sum+=t;if(d!=null)sumDist+=d/1000;}if(sum>0)duration=sum/60;if(sumDist>0)lastKnownDistance=sumDist;}
+ const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
+ return result(filename,new Date(when).toISOString(),duration,lastKnownDistance??dist,ascent,mean(powers),mean(hrs),mean(cads),{source:isGPX?'GPX activity':'TCX activity',records:points.length});
+}
+async function parse(file){
+ if(file.size>25*1024*1024)throw Error(file.name+': file exceeds 25 MB');
+ let name=file.name.toLowerCase();
+ if(name.endsWith('.fit.gz')){
+   if(typeof DecompressionStream==='undefined')throw Error('This browser cannot decompress .fit.gz. Unzip it first.');
+   let arr=await new Response(file.stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();return decodeFIT(arr,file.name);
+ }
+ if(name.endsWith('.fit'))return decodeFIT(await file.arrayBuffer(),file.name);
+ if(name.endsWith('.tcx'))return decodeXML(await file.text(),file.name,false);
+ if(name.endsWith('.gpx'))return decodeXML(await file.text(),file.name,true);
+ throw Error('Unsupported format; select .fit, .fit.gz, .tcx, or timed .gpx');
+}
+window.RideWeaveImport={parse};
+})();
+
+</script>
+  <script>
+/* RideWeave training planner v0.4 — deterministic, inspectable prototype.
+   Plans are provisional, not medical clearance. No data leaves the browser. */
+(function(root,factory){'use strict';const api=factory();if(typeof module!=='undefined'&&module.exports)module.exports=api;root.RideWeaveCoach=api;})(typeof window!=='undefined'?window:globalThis,function(){
+'use strict';
+const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const number=(x,d=0)=>Number.isFinite(Number(x))?Number(x):d;
+const cap=(x,a,b)=>Math.max(a,Math.min(x,b));
+const local=(date)=>new Date(String(date).slice(0,10)+'T12:00:00');
+const iso=(date)=>[date.getFullYear(),String(date.getMonth()+1).padStart(2,'0'),String(date.getDate()).padStart(2,'0')].join('-');
+const add=(date,n)=>{const d=local(date);d.setDate(d.getDate()+n);return iso(d)};
+const diff=(a,b)=>Math.round((local(b)-local(a))/86400000);
+const startOfWeek=(date)=>{const d=local(date);d.setDate(d.getDate()-(d.getDay()+6)%7);return iso(d)};
+const sum=(xs)=>xs.reduce((a,b)=>a+b,0);
+const f1=(x)=>Math.round(x*10)/10;
+const weekOf=(x)=>startOfWeek(x.date);
+const nearestA=(events,now)=>[...events].filter(x=>x.priority==='A'&&x.date>=now).sort((a,b)=>a.date.localeCompare(b.date))[0]||[...events].filter(x=>x.date>=now).sort((a,b)=>a.date.localeCompare(b.date))[0]||null;
+const demands=(event)=>{if(!event)return {climbing:false,late:false,long:false};let r=event.route,km=number(r?.distance||event.distance),up=number(r?.ascent??event.ascent),climbs=r?.climbs||[];return {climbing:km>0&&up/km>=11,late:climbs.some(c=>number(c.start)>km*.68&&number(c.gain)>=30),long:km>=90,gravel:/gravel|mtb/i.test(event.discipline||'')};};
+const variants={
+ Foundation:[
+  ['Cadence and aerobic control','6 × 1 min smooth high cadence within a predominantly easy ride; keep the effort comfortable.','Z2 + skills'],
+  ['Tempo introduction','2 × 8 min at 75–82% of provisional FTP; generous easy spinning between.','Tempo'],
+  ['Aerobic strength blocks','3 × 8 min at 78–85% FTP. Smooth pressure, no grinding.','Tempo'],
+  ['Endurance with short surges','6 × 30 sec brisk but controlled efforts, full recovery; not sprinting.','Endurance + skills']
+ ],
+ Build:[
+  ['Sweet-spot introduction','3 × 8 min at 88–92% FTP, 4 min easy between. Scale by feel if FTP is old.','Sweet spot'],
+  ['Sustained tempo','2 × 15 min at 80–86% FTP. Maintain a smooth cadence.','Tempo'],
+  ['Threshold confidence','4 × 4 min at 92–98% FTP, 4 min recovery; never force the final repeat.','Threshold'],
+  ['Progressive sweet spot','2 × 12 min at 87–92% FTP, 6 min easy recovery.','Sweet spot']
+ ],
+ Specific:[
+  ['Repeatable climbing efforts','5 × 4 min controlled 95–100% FTP; easy recovery after each.','Threshold'],
+  ['Climbing durability','3 × 10 min 85–92% FTP, preferably over rolling ground.','Tempo / sweet spot'],
+  ['Over-under control','3 × 8 min alternating 2 min at 90% / 2 min at 100% FTP.','Threshold'],
+  ['Late-ride tempo rehearsal','After an aerobic lead-in, 2 × 12 min controlled tempo to simulate late-event climbing.','Tempo']
+ ],
+ Taper:[
+  ['Short sharpening openers','3 × 2 min at 85–95% FTP with full recovery. Finish fresher than you started.','Openers'],
+  ['Cadence openers','4 × 45 sec lively cadence; keep the overall ride easy.','Openers']
+ ],
+ Transition:[
+  ['Aerobic reset','Easy spinning and comfortable cadence. No target power to chase.','Z2'],
+  ['Rebuild rhythm','3 × 6 min gentle tempo within an easy ride if fully recovered.','Endurance + tempo']
+ ]
+};
+const longThemes=[
+ 'Steady aerobic durability — practise eating early and consistently.',
+ 'Rolling endurance — keep climbs controlled, practise smooth descending.',
+ 'Fuelled long ride — test drink mix, snacks and regular carbohydrate intake.',
+ 'Finish-strong endurance — if fresh, ride the final 20 minutes at upper Zone 2.',
+ 'Mixed-terrain confidence — practise traction, line choice and relaxed handling.',
+ 'Climbing distribution — ride several moderate climbs without power spikes.',
+ 'Aerobic endurance with a long steady middle section and consistent cadence.',
+ 'Low-pressure endurance — keep the entire ride conversational and comfortable.'
+];
+function history(activities=[],athlete={},now,coverage='partial'){
+ const valid=(activities||[]).filter(x=>x&&typeof x.date==='string'&&x.date<=now&&diff(x.date,now)>=0&&diff(x.date,now)<56&&number(x.duration)>0);
+ const recent=valid.filter(x=>diff(x.date,now)<28);
+ const dateWeeks=[...new Set(recent.map(weekOf))].sort();
+ const allWeeks=[...new Set(valid.map(weekOf))].sort();
+ const minutes=sum(recent.map(x=>number(x.duration)));
+ const priorMinutes=sum(valid.filter(x=>diff(x.date,now)>=28).map(x=>number(x.duration)));
+ const maxWeek=allWeeks.length?allWeeks[allWeeks.length-1]:null;
+ const weekTotals=Object.fromEntries(allWeeks.map(w=>[w,sum(valid.filter(x=>weekOf(x)===w).map(x=>number(x.duration)))/60]));
+ const activeHours=Object.values(weekTotals).filter(x=>x>0);
+ const topTypical=activeHours.slice().sort((a,b)=>a-b);
+ const median=topTypical.length?topTypical[Math.floor((topTypical.length-1)/2)]:0;
+ const topTwoTypical=topTypical.length?sum(topTypical.slice(-2))/Math.min(2,topTypical.length):0;
+ const timeSince=valid.length?Math.min(...valid.map(x=>diff(x.date,now))):null;
+ let confidence='none';
+ if(valid.length>0)confidence='limited';
+ if(recent.length>=6&&dateWeeks.length>=3&&timeSince<=14)confidence='moderate';
+ if(coverage==='complete'&&recent.length>=8&&dateWeeks.length>=4&&timeSince<=10)confidence='higher';
+ const powerRides=valid.filter(x=>number(x.normalizedPower)>0);
+ const ftp=number(athlete.ftp);
+ const ftpCurrent=athlete.ftpVerified===true&&!/historical|old ftp|needs reassess|outdated|unverified/i.test(String(athlete.notes||''));
+ // Only true NP with a current FTP reference can produce an illustrative session TSS.
+ const tssRides=powerRides.filter(x=>ftp>0&&ftpCurrent);
+ const tss=sum(tssRides.map(x=>number(x.duration)/60*Math.pow(number(x.normalizedPower)/ftp,2)*100));
+ return {count:valid.length,recentCount:recent.length,activeWeeks:dateWeeks.length,allWeeks:allWeeks.length,lastRideDaysAgo:timeSince,minutes28:minutes,hours28:f1(minutes/60),previousHours28:f1(priorMinutes/60),hoursPerCalendarWeek:f1(minutes/240),medianActiveWeekHours:f1(median),topTwoActiveWeekHours:f1(topTwoTypical),weekTotals,confidence,coverage,ftpCurrent,powerCount:valid.filter(x=>number(x.power)>0).length,hrCount:valid.filter(x=>number(x.avgHr)>0).length,npCount:powerRides.length,tssCount:tssRides.length,illustrativeTss:Math.round(tss),completenessWarning:coverage!=='complete'?'Some sessions may be missing; days without imported rides are not assumed to be rest days.':'History marked complete by athlete; verify devices and missing recordings before relying on load estimates.'};
+}
+function baseline(h,athlete,available,desired){
+ const declared=number(athlete.baseHours,3.5)||3.5;
+ const target=number(athlete.targetHours,6)||6;
+ const maxCap=Math.max(0,available/60);
+ if(h.confidence==='none')return {mode:'Starter · no imported rides',hours:f1(Math.min(maxCap,target,Math.max(1.5,declared*.65))),confidence:'none',reason:'Start below the stated typical volume; progress through varied aerobic and technique sessions while logging actual rides.'};
+ const observed=h.hours28; // a four-week window, with unknown missing rides
+ const observedWeekly=observed/4;
+ const recentActive=Math.max(h.medianActiveWeekHours,h.topTwoActiveWeekHours,observedWeekly);
+ const historicalFloor=declared*.72;
+ const inferred=h.coverage==='complete'?Math.max(observedWeekly,declared*.65):Math.max(historicalFloor,Math.min(recentActive*.82,declared*.95));
+ const hours=Math.min(maxCap,target,Math.max(1.5,inferred));
+ return {mode:h.confidence==='limited'?'Mixed · limited imports':'Activity-informed · provisional',hours:f1(hours),confidence:h.confidence,reason:h.coverage==='complete'?'Activity volume influences starting hours; trend is still provisional, not a medical readiness score.':'Imported rides inform a cautious starting point. Days without imported rides remain unknown, so this provisional plan is checked against your stated typical volume.'};
+}
+function eventTime(ev){let km=number(ev.route?.distance||ev.distance);const road=/road|time trial/i.test(ev.discipline||'');return Math.round(km/(road?24:17)*60);}
+function build(input){
+ const athlete=input.athlete||{},events=input.events||[],activities=input.activities||[],now=input.now,start=input.start,coverage=input.coverage||'partial';
+ const h=history(activities,athlete,now,coverage),avail=(athlete.trainingDays||Array(7).fill(0)).map(x=>Math.max(0,Math.floor(number(x))));
+ const capacity=sum(avail),goal=Math.min(capacity,Math.max(0,number(athlete.targetHours,6)*60));
+ const b=baseline(h,athlete,capacity,goal/60);
+ const anchor=nearestA(events,now),daysToA=anchor?diff(start,anchor.date):999,wi=Math.floor(diff(startOfWeek(now),start)/7);
+ const cycle=((wi%4)+4)%4, recovery=cycle===3,cycleNo=Math.floor(Math.max(0,wi)/4);
+ let phase=daysToA>105?'Foundation':daysToA>49?'Build':daysToA>16?'Specific':daysToA>=0?'Taper':'Transition';
+ if(!anchor)phase='Foundation';
+ const isTaper=daysToA>=0&&daysToA<=13, isRaceWeek=daysToA>=0&&daysToA<=6;
+ let progressive=Math.min(goal,b.hours*60*Math.pow(h.count?1.055:1.065,Math.max(0,wi)));
+ // Demand one genuine recovery week after three progressive weeks.
+ let target=progressive*(recovery?.73:1);
+ if(isTaper)target=Math.min(target,goal*(isRaceWeek?.43:.67));
+ if(phase==='Transition')target=Math.min(goal*.65,target);
+ target=Math.round(target/5)*5;
+ const stage=phase==='Foundation'?'Establish an aerobic base':phase==='Build'?'Extend sustainable power':phase==='Specific'?'Rehearse course demands':phase==='Taper'?'Arrive rested and ready':'Recover and reassess';
+ const theme=recovery?'Recovery and absorption':stage;
+ const out=DAYS.map((label,i)=>({label,date:add(start,i),avail:avail[i],minutes:0,type:'Rest',title:'Recovery / mobility',desc:'No ride prescribed. Optional gentle mobility.',priority:'Rest',zone:'Rest'}));
+ const choices=avail.map((m,i)=>({m,i})).filter(x=>x.m>=25);
+ const warnings=[],reasons=[b.reason];
+ if(athlete.ftpVerified===true&&!h.ftpCurrent)warnings.push('FTP is marked verified, but the athlete notes describe it as historical. Power targets and load estimates remain provisional until retested.');
+ if(h.confidence==='none')warnings.push('No rides imported. Training starts with a conservative establishing block, rather than assuming fitness from FTP alone.');
+ else if(coverage!=='complete')warnings.push('Imported activity history is partial. Unrecorded days are unknown, not confirmed rest days.');
+ if(!choices.length)return {start,sessions:out,focus:phase,theme,target:0,history:h,baseline:b,reasons,warnings:['No training availability entered.'],recoveryWeek:recovery};
+ // Prioritise weekend long ride; preserve rest around the quality day.
+ const weekends=choices.filter(x=>x.i>=5).sort((a,b)=>b.m-a.m);
+ const long=weekends[0]||choices.slice().sort((a,b)=>b.m-a.m)[0];
+ let eventThisWeek=events.filter(x=>x.date>=start&&x.date<=add(start,6));
+ const eventIndices=new Set(eventThisWeek.map(x=>diff(start,x.date)));
+ const nextAny=[...events].filter(x=>x.date>=start).sort((a,b)=>a.date.localeCompare(b.date))[0];
+ const longNeeds=demands(anchor);
+ const qualityOpts=choices.filter(x=>x.i!==long.i&&!eventIndices.has(x.i)&&x.m>=40&&Math.abs(x.i-long.i)>=2).sort((a,b)=>{
+  const pref=[1,3,2,4,0,6,5];return pref.indexOf(a.i)-pref.indexOf(b.i);
+ });
+ const quality=qualityOpts[0];
+ let longMin=Math.min(long.m,Math.max(50,Math.round(target*(recovery?.38:.46)/5)*5));
+ if(phase==='Specific'&&!recovery&&!isTaper)longMin=Math.min(long.m,Math.max(longMin,Math.round(target*.52/5)*5));
+ if(isRaceWeek)longMin=Math.min(longMin,65);
+ if(eventThisWeek.length)longMin=Math.min(longMin,80);
+ if(longMin>=25&&!eventIndices.has(long.i))Object.assign(out[long.i],{type:'Long',title:recovery?'Shorter aerobic endurance':'Long endurance · '+['steady','rolling','fuelled','durability'][wi%4],minutes:longMin,zone:'Z2',priority:'Key',desc:(recovery?'Shorten the usual long ride; keep intensity easy.':longThemes[Math.max(0,wi)%longThemes.length])+(longNeeds.climbing&&phase==='Specific'?' Include steady climbing, but avoid surges.':'')});
+ let qMin=0;
+ if(quality&&phase!=='Transition'&&target>=190){
+  const v=variants[phase][Math.max(0,wi)%variants[phase].length];
+  qMin=Math.min(quality.m,Math.max(35,Math.round(target*(isRaceWeek?.14:recovery?.13:.17)/5)*5));
+  if(isRaceWeek)qMin=Math.min(qMin,40);
+  if(recovery)qMin=Math.min(qMin,45);
+  const name=recovery?(phase==='Taper'?'Light openers':'Low-pressure aerobic technique'):v[0];
+  const content=recovery?'Stay below tempo for most of the ride. A short cadence drill is optional; avoid accumulating fatigue.':v[1];
+  Object.assign(out[quality.i],{type:recovery?'Easy':'Hard',title:name,minutes:qMin,zone:recovery?'Z2 + skills':v[2],priority:'Key',desc:content+(athlete.ftpVerified===true?'':' FTP is provisional: use perceived exertion to check the intensity.')});
+ }
+ // Allocate remaining minutes as easy riding, with different purposes across the week.
+ let allocated=sum(out.map(x=>x.minutes));
+ let remaining=Math.max(0,target-allocated);
+ const easyChoices=choices.filter(x=>out[x.i].type==='Rest'&&!eventIndices.has(x.i)).sort((a,b)=>{const pref=[2,4,6,3,0,1,5];return pref.indexOf(a.i)-pref.indexOf(b.i)});
+ const easyThemes=['Conversational Zone 2 · cadence focus','Easy endurance · comfortable breathing','Skills ride · smooth corners and low stress','Aerobic maintenance · no intensity targets','Gentle recovery spin · finish feeling better','Endurance Zone 2 · hydration rehearsal'];
+ for(let c of easyChoices){if(remaining<25)break;
+  const use=Math.min(c.m,Math.max(0,Math.round(Math.min(remaining,Math.max(30,target*.22))/5)*5));
+  if(use<25)continue;
+  let desc=easyThemes[(wi+c.i)%easyThemes.length];
+  Object.assign(out[c.i],{type:'Easy',title:use<=40?'Easy aerobic spin':'Endurance Zone 2',minutes:use,zone:'Z2',priority:'Support',desc});remaining-=use;
+ }
+ // Spend any residual budget within available slots; never break a daily cap.
+ if(remaining>=5){for(let d of out.filter(x=>x.type!=='Rest'&&x.type!=='Hard'&&!eventIndices.has(diff(start,x.date))).sort((a,b)=>b.avail-b.minutes-(a.avail-a.minutes))){if(remaining<5)break;const extra=Math.min(d.avail-d.minutes,remaining);const delta=Math.floor(extra/5)*5;if(delta>0){d.minutes+=delta;remaining-=delta}}}
+ const weekEventDays=[];
+ const taperCollision=eventThisWeek.find(ev=>anchor&&anchor.id!==ev.id&&anchor.priority==='A'&&diff(ev.date,anchor.date)>=0&&diff(ev.date,anchor.date)<=10);
+ if(taperCollision){const ix=diff(start,taperCollision.date);for(let j=Math.max(0,ix-1);j<ix;j++)if(out[j].type!=='Event')Object.assign(out[j],{type:'Rest',title:'Protect the A-event taper',minutes:0,zone:'Recovery',priority:'Freshness',desc:'Do not stack a long workout immediately before a 100 km event six days before the A target.'});for(let j=Math.max(0,ix-3);j<ix-1;j++)if(out[j].type==='Hard')Object.assign(out[j],{type:'Easy',title:'Taper aerobic spin',minutes:Math.min(35,out[j].minutes),zone:'Z2',priority:'Taper',desc:'Avoid carrying intensity and fatigue into the back-to-back event period.'});}
+ for(let ev of eventThisWeek){const i=diff(start,ev.date);const mins=eventTime(ev);const closeToA=anchor&&anchor.id!==ev.id&&anchor.priority==='A'&&diff(ev.date,anchor.date)>=0&&diff(ev.date,anchor.date)<=10;
+  const priority=ev.priority||'C';
+  const effort=ev.effort||(priority==='A'?'Target effort':priority==='B'?'Controlled event':'Training effort');
+  let desc=`${priority}-priority event. Estimated time ${Math.floor(mins/60)}h ${String(mins%60).padStart(2,'0')}m; the event counts as a load, not an extra workout. Planned effort: ${effort}.`;
+  if(closeToA){desc+=' Important: this is too close to the A event for a hard all-out ride. Consider shortening, easy pacing or not starting; protect the taper.';warnings.push(ev.name+' is only '+diff(ev.date,anchor.date)+' days before the A target. Its full distance may compromise freshness.');}
+  Object.assign(out[i],{type:'Event',title:ev.name,minutes:mins,zone:'Event',priority:closeToA?'Taper conflict':'Event',desc,eventId:ev.id,effort});weekEventDays.push(i);
+ }
+ // Real event load replaces workouts and drives pre-event freshness / post-event recovery.
+ for(let ix of weekEventDays){const ev=eventThisWeek.find(x=>diff(start,x.date)===ix),important=ev.priority!=='C'||!!(anchor&&anchor.id!==ev.id&&anchor.priority==='A'&&diff(ev.date,anchor.date)>=0&&diff(ev.date,anchor.date)<=10);
+  for(let j=Math.max(0,ix-(important?2:1));j<ix;j++)if(out[j].type!=='Event'&&out[j].type!=='Rest'){
+   if(out[j].type==='Hard'||important){Object.assign(out[j],{type:'Easy',title:'Pre-event easy spin',minutes:Math.min(out[j].minutes,important?35:45),zone:'Recovery',priority:'Freshness',desc:'Stay comfortable; reduce accumulated fatigue ahead of the event.'})}}
+  for(let j=ix+1;j<=Math.min(6,ix+(important?2:1));j++)if(out[j].type!=='Event')Object.assign(out[j],{type:j===ix+1?'Rest':'Easy',title:j===ix+1?'Event recovery':'Optional recovery spin',minutes:j===ix+1?0:Math.min(out[j].avail,35),zone:'Recovery',priority:'Recovery',desc:'After the event, reassess fatigue, sleep, soreness and recovery before adding training.'});
+ }
+ // Avoid workouts in the days immediately AFTER an event falling in the previous week.
+ for(let ev of events){const since=diff(ev.date,start);if(since<=2&&since>0&&(ev.priority!=='C'||!!(anchor&&anchor.id!==ev.id&&anchor.priority==='A'&&diff(ev.date,anchor.date)>=0&&diff(ev.date,anchor.date)<=10)))for(let j=0;j<Math.min(7,3-since);j++)if(out[j].type!=='Event')Object.assign(out[j],{type:'Rest',title:'Post-event recovery',minutes:0,zone:'Recovery',priority:'Recovery',desc:'Protect recovery after a significant event; reassess before loading.'});}
+ // Protect A-event taper from an overlapping C event and hard sessions.
+ if(anchor&&daysToA>=0&&daysToA<=10){for(let d of out){const days=diff(d.date,anchor.date);if(d.type==='Hard'&&days>=0&&days<=6)Object.assign(d,{type:'Easy',title:'Taper aerobic spin',minutes:Math.min(d.minutes,45),zone:'Z2',desc:'No hard training this close to the A event. Save the legs.',priority:'Taper'});}}
+ // Imported workouts appear as actuals on historical days and are never scheduled twice.
+ const recorded=activities.filter(a=>a&&a.date>=start&&a.date<=add(start,6)&&a.date<=now&&number(a.duration)>0);
+ for(let i=0;i<7;i++){let r=recorded.filter(a=>a.date===out[i].date);if(!r.length)continue;
+  const minutes=Math.round(sum(r.map(x=>number(x.duration))));const km=f1(sum(r.map(x=>number(x.distance))));const p=r.find(x=>number(x.normalizedPower)>0)?.normalizedPower;
+  out[i]={...out[i],type:'Recorded',title:r.length===1?'Recorded · '+(r[0].title||'Ride'):`${r.length} completed rides`,minutes,zone:'Actual',priority:'Recorded',recorded:true,desc:`Imported actual: ${km} km, ${minutes} min${p?', NP '+p+' W':''}. The planned workout was replaced, not added to training load.`};
+ }
+ // Imported hard or long rides in the preceding 48 hours temper upcoming intensity.
+ for(let d of out){if(d.date<=now||d.type!=='Hard')continue;let heavy=activities.some(x=>{let delta=diff(x.date,d.date);return delta>0&&delta<=2&&(number(x.duration)>=180||number(x.rpe)>=8||(number(x.normalizedPower)>0&&number(athlete.ftp)>0&&number(x.normalizedPower)/number(athlete.ftp)>.92&&number(x.duration)>=75))});
+  if(heavy){Object.assign(d,{type:'Easy',title:'Recovery-adjusted aerobic ride',minutes:Math.min(45,d.minutes),zone:'Z2',priority:'Recovery',desc:'A substantial recorded ride precedes this workout. Avoid stacking intensity; reassess perceived recovery.'});reasons.push('Recent activity reduced a quality workout to avoid stacking hard efforts.');}
+ }
+ if(recovery)reasons.push('Every fourth week absorbs training with substantially less planned riding.');
+ if(isTaper)reasons.push('A-event taper reduces training volume and removes fatigue-producing intervals.');
+ if(phase==='Specific')reasons.push('Workouts vary to target repeatable climbs, sustained power, late-ride durability and event fuelling.');
+ if(eventThisWeek.length)reasons.push('Events replace training sessions and prompt pre-/post-event recovery; no double-counting.');
+ reasons.push('Weekly themes and interval structures vary through a four-week cycle; long rides progress within available time.');
+ const planned=sum(out.filter(x=>x.type!=='Recorded'&&x.type!=='Event').map(x=>x.minutes));
+ const actual=sum(out.filter(x=>x.type==='Recorded').map(x=>x.minutes));
+ const eventMinutes=sum(out.filter(x=>x.type==='Event').map(x=>x.minutes));
+ return {start,sessions:out,focus:phase,theme,target,planned,actual,eventMinutes,history:h,baseline:b,reasons,warnings,recoveryWeek:recovery,weekIndex:wi,weekNo:Math.max(1,wi+1)};
+}
+return {build,history,baseline,startOfWeek,add,demands};
+});
+
+</script>
+  <script>/* RideWeave v0.4 — local-first evaluation application.
    No network requests for athlete data, tracking, accounts, external AI, or third-party API integrations.
    Coaching logic is rule-based and for evaluation only, not a medical clearance system. */
 'use strict';
@@ -87,53 +423,21 @@ function safety(check){if(!check)return {level:'unknown',title:'No recent check-
  return {level:'good',title:'No reported warning flags',reason:'Your latest check-in does not show the app’s screening flags. This is not medical clearance; follow symptoms and your own judgement.',factor:1};}
 const checkLevel=()=>{let c=latestCheckin();return !c||daysBetween(c.date,iso(NOW()))>2?{level:'unknown',title:'Check in before training',reason:'No recent recovery information. Complete a check-in to update this week’s advice.',factor:1}:safety(c)};
 function sessionsForWeek(start){
- const at=state.athlete; let evt=primaryEvent(),dem=eventDemands(evt); let toEvent=daysBetween(start,evt.date);let weeksUntil=Math.ceil(toEvent/7);let avail=at.trainingDays.map(x=>Math.max(0,n(x)));let cap=avail.reduce((a,b)=>a+b,0);let desired=clamp(n(at.targetHours,6)*60,60,cap||60);
- const index=clamp(Math.floor(daysBetween(weekStart(iso(NOW())),start)/7),0,25);
- // Simple 3:1 load pattern with a conservative 12% growth cap between build weeks.
- const base=clamp(weeklyBaseline()*60,90,desired);
- let target=Math.min(desired,base*Math.pow(1.035,index));if(index%4===3)target*=.73;
- const taper=toEvent>=0&&toEvent<15;if(taper)target*=toEvent<7?.55:.76;
- const focus=toEvent>100?'Foundation':toEvent>42?'Build':toEvent>14?'Specific':toEvent>=0?'Taper':'Transition';
- const out=DAY.map((label,i)=>({date:addDays(start,i),label,avail:avail[i],minutes:0,type:'Rest',title:'Rest / mobility',desc:'Recovery is productive training.',priority:'Rest',zone:'Recovery'}));
- let candidate=avail.map((v,i)=>({v,i})).filter(z=>z.v>=25);
- if(!candidate.length)return {sessions:out,target:0,focus,warning:'No training availability entered.'};
- const longIdx=candidate.filter(z=>z.i>=5).sort((a,b)=>b.v-a.v)[0]?.i??candidate.sort((a,b)=>b.v-a.v)[0].i;
- const hardOpts=[1,3,4,2,0,6,5].filter(i=>avail[i]>=40&&i!==longIdx);
- let hardIdx=hardOpts[0]??null;
- let secondIdx=hardOpts.find(i=>i!==hardIdx&&hardIdx!==null&&Math.abs(i-hardIdx)>=2&&i!==longIdx&&Math.abs(i-longIdx)>=2);
- const lowBase=weeklyBaseline()<3.5;
- const templates={Foundation:['Tempo development','3 × 8 min at a controlled tempo effort after warm-up','Tempo',.82],Build:['Sweet spot progression','3 × 10 min at 88–92% FTP, with full recoveries','Sweet spot',.9],Specific:['Repeatable climbing','4 × 6 min at 95–100% FTP; avoid sprinting the first interval','Threshold',.98],Taper:['Openers','Short controlled efforts, ample easy riding, no fatigue accumulation','Openers',.87],Transition:['Aerobic maintenance','Comfortable aerobic riding; review the next goal','Endurance',.65]};
- const tp=[...templates[focus]];
- if(dem.climbing&&focus==='Build'){tp[0]='Sustained climbing strength';tp[1]='3 × 10 min seated tempo / sweet-spot climbing. Keep cadence comfortable; avoid forced low-cadence grinding.'}
- if(dem.late&&focus==='Specific'){tp[0]='Climbing under accumulated fatigue';tp[1]='After a longer aerobic warm-up, 3 × 8 min controlled upper-tempo climbs. Practise consistency under fatigue.'}
- if(!dem.climbing&&evt.discipline==='Road'&&focus==='Specific'){tp[0]='Sustained sportive power';tp[1]='3 × 12 min controlled tempo with steady cadence and no unnecessary surges.'}
-
- function slot(i,type,title,desc,zone,priority,capRatio){if(i==null||avail[i]<25)return;Object.assign(out[i],{type,title,desc,zone,priority,minutes:Math.min(avail[i],Math.round(Math.max(25,target*capRatio)/5)*5)})}
- slot(longIdx,'Long','Long endurance ride',`Zone 2. Practise food and bottles. ${focus==='Specific'&&dem.climbing?'Include controlled climbing near the end only if well recovered.':''} ${dem.long?'Progress duration and rehearse event-rate fuelling.':''}`,'Z2','Key',.49);
- if(hardIdx!=null)slot(hardIdx,'Hard',tp[0],tp[1],tp[2],'Key',lowBase?.14:.19);
- if(!lowBase&&secondIdx!=null&&target>=300&&focus!=='Taper')slot(secondIdx,'Hard',focus==='Specific'?'Over-under climb intervals':'Sustained aerobic tempo',focus==='Specific'?'3 × 8 min alternating 2 min 95% / 2 min 102% FTP.':'2 × 15 min at 80–85% FTP. Keep the effort controlled.','Tempo','Support',.14);
- const used=out.reduce((s,x)=>s+x.minutes,0);
- let rem=Math.max(0,target-used);
- let easyIndices=candidate.map(z=>z.i).filter(i=>out[i].type==='Rest').sort((a,b)=>avail[b]-avail[a]);
- for(let i of easyIndices){if(rem<20)break;let m=Math.min(avail[i],Math.round(rem/5)*5);if(m>=25){Object.assign(out[i],{minutes:m,type:'Easy',title:m<=40?'Recovery / easy spin':'Endurance Zone 2',desc:'Conversation pace. Keep it genuinely easy.','zone':'Z2','priority':'Support'});rem-=m}}
- if(rem>10){let ride=out[longIdx];ride.minutes=Math.min(avail[longIdx],ride.minutes+Math.round(rem/5)*5)}
- for(let s of out){let event=state.events.find(ev=>ev.date===s.date);if(event){Object.assign(s,{type:'Event',title:event.name,minutes:Math.round((n(event.distance,60)/18)*60),desc:`${event.priority}-priority ${event.discipline} event. Adjust surrounding sessions and recovery.`,zone:'Event',priority:'Event',eventId:event.id})}}
- // Time-specific manual overrides and logged completion are applied without erasing original plan.
- let health=checkLevel();for(let s of out){
- let ov=state.overrideDays[s.date];if(ov)Object.assign(s,ov);
- if(health.factor<1&&daysBetween(iso(NOW()),s.date)>=0&&daysBetween(iso(NOW()),s.date)<4){
-  if(s.type==='Event'){
-   s.desc='Event remains on your calendar, but health concerns require clinical judgement. This app does not clear participation. '+health.reason;
-  }else if(health.factor<.5){
-   Object.assign(s,{minutes:0,type:'Rest',title:'Training paused — assess symptoms',desc:health.reason,zone:'Recovery',priority:'Safety'});
-  }else if(s.type==='Hard'){
-   Object.assign(s,{type:'Easy',minutes:Math.min(s.minutes,40),title:'Easy option / reassess',desc:health.reason,zone:'Recovery',priority:'Safety'});
-  }else if(s.type!=='Rest'&&health.factor<.8){
-   s.minutes=Math.round(s.minutes*health.factor/5)*5;s.desc='Reduced provisional training load. '+health.reason;
+  // The coach is deterministic: same athlete, dates and history produce the same plan.
+  // No automatic writes to athlete history or settings; manual overrides remain authoritative.
+  const plan=RideWeaveCoach.build({start,now:iso(NOW()),athlete:state.athlete,events:state.events,activities:state.activities,coverage:state.settings.historyCoverage||'partial'});
+  const health=checkLevel();
+  for(const s of plan.sessions){
+    if(s.recorded)continue; // Actual imported work is evidence, never a workout to overwrite.
+    const ov=state.overrideDays[s.date];if(ov&&s.type!=='Event')Object.assign(s,ov);
+    if(health.factor<1&&daysBetween(iso(NOW()),s.date)>=0&&daysBetween(iso(NOW()),s.date)<4){
+      if(s.type==='Event')s.desc='Event remains on the calendar, but reported health concerns need professional judgement. '+health.reason;
+      else if(health.factor<.5)Object.assign(s,{minutes:0,type:'Rest',title:'Training paused — assess symptoms',desc:health.reason,zone:'Recovery',priority:'Safety'});
+      else if(s.type==='Hard')Object.assign(s,{type:'Easy',minutes:Math.min(s.minutes,40),title:'Recovery-led easy option',desc:health.reason,zone:'Recovery',priority:'Safety'});
+      else if(s.type!=='Rest'&&health.factor<.8){s.minutes=Math.round(s.minutes*health.factor/5)*5;s.desc='Reduced due to latest check-in. '+health.reason;}
+    }
   }
- }
- }
- return {sessions:out,target:Math.round(target),focus,warning:null};
+  return plan;
 }
 function weekPlan(){let offset=n(state.settings.weekOffset);return {start:addDays(weekStart(iso(NOW())),offset*7),...sessionsForWeek(addDays(weekStart(iso(NOW())),offset*7))}}
 function sessionByDate(date){let p=sessionsForWeek(weekStart(date));return p.sessions.find(x=>x.date===date)}
@@ -184,16 +488,25 @@ function season(){let main=primaryEvent();let rows=eventsSorted().map(x=>{let d=
  <div class="layout cols2 section-space">${panel('Season calendar',rows,action('+ Add event','addevent','small'))}
  ${panel('How the plan responds',`<div class="step-list"><div class="step"><b>1</b><p><strong>A events</strong> anchor the build, specific phase and taper.</p></div><div class="step"><b>2</b><p><strong>B events</strong> can replace longer training rides and require planned recovery, without automatically sacrificing the main target.</p></div><div class="step"><b>3</b><p><strong>C events</strong> provide experience or training stimulus and still count towards load.</p></div><div class="step"><b>4</b><p><strong>Rolling planning</strong> keeps later weeks provisional, with a fresh assessment and plan as the event approaches.</p></div></div><div class="divider"></div><div class="muted-note">The first trial uses a rules-based training template. It does not yet calculate validated individual performance predictions or independently verify safe injury return-to-sport.</div><div class="section-space">${action('Open training block','training','')}${action('Change plan duration','horizon','secondary')}</div>`)}</div>`;
 }
-function training(){let wp=weekPlan(),offset=n(state.settings.weekOffset),health=checkLevel(),weeks=planWeeks(),all=weeks.map((w,i)=>({start:w.start,total:w.sessions.filter(s=>s.type!=='Event').reduce((a,s)=>a+s.minutes,0),focus:w.focus}));let current=wp.sessions.reduce((s,x)=>s+(x.type==='Event'?0:x.minutes),0);
- return htmlHead('Adaptive training','Your next '+state.settings.trainingHorizon+' weeks.','A progressive training block built around your target event and available days. Mark workouts as done or missed; adjust scheduling as your week changes.')+
- `<div class="layout cols4">${stat('Phase',wp.focus,'','Rule-based event phase')}${stat('Weekly target',round(current/60,1),'hrs','Recovery and taper changes applied')}${stat('Reference FTP',n(state.athlete.ftp)||'—','W','Update from actual tests')}${stat('Current recovery',health.level==='good'?'Normal':health.level==='danger'?'Pause':health.level==='warn'?'Modified':'Review','','No medical clearance implied')}</div>
- <section class="panel section-space"><div class="panel-heading"><div><h2>Training calendar</h2><p>Week of ${fmtDate(wp.start)} · ${e(wp.focus)} phase</p></div><div class="week-controls"><button class="btn small ghost" data-act="prevweek">← Previous</button><button class="btn small secondary" data-act="thisweek">Today</button><button class="btn small ghost" data-act="nextweek">Next →</button></div></div>
- <div class="schedule">${wp.sessions.map(s=>{let log=state.logs[s.date];return `<div class="daycard ${s.date===iso(NOW())?'today':''}"><div class="daycard-head"><strong>${DAY[(fromISO(s.date).getDay()+6)%7]}</strong><span>${fromISO(s.date).getDate()} ${month(s.date).toLowerCase()}</span></div><div class="daycard-title"><span class="type-dot ${e(s.type)}"></span>${e(s.title)}</div><div class="daycard-detail">${s.minutes} min · ${e(s.zone)}<div style="margin-top:6px">${e(s.desc)}</div></div><div class="daycard-footer">${log?`<span class="badge ${log==='done'?'green':'warn'}">${log==='done'?'Completed':'Missed'}</span>`:`${s.type!=='Rest'?`<button class="micro" data-act="workout" data-date="${s.date}">Details</button>`:''}`}</div></div>`}).join('')}</div>
+function training(){
+ const wp=weekPlan(),health=checkLevel(),weeks=planWeeks(),all=weeks.map(w=>({start:w.start,total:w.sessions.reduce((a,s)=>a+s.minutes,0),focus:w.focus,theme:w.theme}));
+ const hist=wp.history,baseline=wp.baseline,other=wp.sessions.filter(x=>x.type==='Event'||x.type==='Recorded').reduce((a,x)=>a+x.minutes,0);
+ const planned=wp.sessions.filter(x=>x.type!=='Event'&&x.type!=='Recorded').reduce((a,x)=>a+x.minutes,0);
+ const roadmap=weeks.map((w,i)=>{const key=w.sessions.find(x=>x.type==='Hard')||w.sessions.find(x=>x.type==='Easy');const long=w.sessions.find(x=>x.type==='Long');const event=w.sessions.find(x=>x.type==='Event');return `<button class="roadmap-button ${n(state.settings.weekOffset)===i?'selected':''}" data-act="jumpweek" data-week="${i}"><strong>Week ${i+1} · ${e(w.focus)}${w.recoveryWeek?' · RECOVERY':''} ${event?'· EVENT':''}</strong><small>${fmtDate(w.start)} · ${round((w.planned+w.actual+w.eventMinutes)/60,1)}h incl. recorded/events</small><small>${e(w.theme)}${key?' · '+e(key.title):''}${long?' · '+long.minutes+'m endurance':''}</small></button>`}).join('');
+ return htmlHead('Adaptive training','A plan that changes every week.','Progressive sessions, aerobic development, recovery weeks and event-specific preparation. Recent rides inform the baseline when available; missing records never count as rest.')+
+ `<div class="layout cols4">${stat('Phase',wp.focus,'',wp.theme)}${stat('Planned training',round(planned/60,1),'hrs','Excludes recorded rides and event duration')}${stat('Recorded / events',round(other/60,1),'hrs','Actuals or estimated event time')}${stat('Starting basis',baseline.hours,'hrs/wk',hist.confidence==='none'?'New athlete / no imports':hist.confidence+' history')}</div>
+ <section class="panel section-space"><div class="panel-heading"><div><h2>Why this week looks different</h2><p>Transparent decisions from the adaptive coach</p></div><span class="badge ${hist.confidence==='none'?'warn':'green'}">${e(baseline.mode)}</span></div>
+ <div class="plan-insights"><div class="plan-insight"><span class="tiny">Activity evidence</span><b>${hist.recentCount} rides in 28 days</b><span class="tiny">${hist.hours28}h recorded · ${hist.activeWeeks} occupied weeks</span></div><div class="plan-insight"><span class="tiny">History quality</span><b>${e(hist.confidence.toUpperCase())}</b><span class="tiny">${e(hist.coverage)} · ${hist.npCount} power-NP records in 56 days</span></div><div class="plan-insight"><span class="tiny">Training focus</span><b>${e(wp.theme)}</b><span class="tiny">Week ${wp.weekNo} · ${wp.recoveryWeek?'Recovery microcycle':'Progressive microcycle'}</span></div></div>
+ ${wp.reasons.map(x=>`<p class="load-help">✓ ${e(x)}</p>`).join('')}
+ ${wp.warnings.map(x=>`<div class="muted-note warn-note section-space">${e(x)}</div>`).join('')}
+ ${action('Review imported rides','activities','secondary small')}</section>
+ <section class="panel section-space"><div class="panel-heading"><div><h2>Training calendar</h2><p>Week of ${fmtDate(wp.start)} · ${e(wp.focus)} · ${e(wp.theme)}</p></div><div class="week-controls"><button class="btn small ghost" data-act="prevweek">← Previous</button><button class="btn small secondary" data-act="thisweek">Today</button><button class="btn small ghost" data-act="nextweek">Next →</button></div></div>
+ <div class="schedule">${wp.sessions.map(s=>{const log=state.logs[s.date];return `<div class="daycard ${s.date===iso(NOW())?'today':''}"><div class="daycard-head"><strong>${DAY[(fromISO(s.date).getDay()+6)%7]}</strong><span>${fromISO(s.date).getDate()} ${month(s.date).toLowerCase()}</span></div><div class="daycard-title"><span class="type-dot ${e(s.type)}"></span>${e(s.title)}</div><div class="daycard-detail">${s.minutes} min · ${e(s.zone)}<div style="margin-top:6px">${e(s.desc)}</div></div><div class="daycard-footer">${s.recorded?'<span class="badge green">Imported actual</span>':log?`<span class="badge ${log==='done'?'green':'warn'}">${log==='done'?'Completed':'Missed'}</span>`:`${s.type!=='Rest'?`<button class="micro" data-act="workout" data-date="${s.date}">Details</button>`:''}`}</div></div>`}).join('')}</div>
  <div class="btnrow section-space">${action('Rebalance remaining week','rebalance','secondary small')}${action('Edit availability','athlete','ghost small')}${action('Export plan CSV','exportplan','ghost small')}</div>
  ${health.level==='danger'?'<div class="muted-note danger-note section-space">Safety screening paused training recommendations. Seek appropriate clinical support.</div>':health.level==='warn'?`<div class="muted-note warn-note section-space">${e(health.reason)}</div>`:''}
  </section>
- <div class="layout cols2 section-space">${panel('16-week load outlook',`<div class="mini-bars" style="height:132px">${all.map((w,i)=>`<span title="Week ${i+1}: ${round(w.total/60,1)} hours (${w.focus})" style="height:${Math.max(6,100*w.total/Math.max(1,...all.map(k=>k.total)))}%;${i===0?'background:var(--lime)':''}"></span>`).join('')}</div><div class="meta-line"><span>Current week</span><span>Week ${all.length} · ${e(all.at(-1)?.focus||'—')}</span></div><p class="tiny">Example progression is based on available hours, a modest weekly growth allowance, periodic recovery weeks and event proximity. It is not calibrated from synced physiology.</p>`)}
- ${panel('Training logic',`<div class="step-list"><div class="step"><b>1</b><p>Prioritise a long endurance ride and one quality session when capacity permits.</p></div><div class="step"><b>2</b><p>Only add a second intensity session when workload history and availability support it.</p></div><div class="step"><b>3</b><p>Use every fourth week for load reduction and taper around the A event.</p></div><div class="step"><b>4</b><p>Respect the latest health check and preserve athlete overrides.</p></div></div><div class="section-space">${action('Review recovery','recovery','secondary small')}</div>`)}</div>`;
+ <div class="layout cols2 section-space">${panel('Rolling load outlook',`<div class="mini-bars" style="height:120px">${all.map((w,i)=>`<span title="Week ${i+1}: ${round(w.total/60,1)} hours (${w.focus}) · ${e(w.theme)}" style="height:${Math.max(5,100*w.total/Math.max(1,...all.map(k=>k.total)))}%;${i===n(state.settings.weekOffset)?'background:var(--lime)':''}"></span>`).join('')}</div><p class="load-help">Bars include recorded sessions and estimated event duration. A reduced week may be a recovery microcycle or taper; an event week may be considerably longer.</p>`)}
+ ${panel('Plan progression · select a week',`<div class="roadmap">${roadmap}</div><div class="muted-note section-space">All future workouts are provisional. A fresh ride, updated availability, recovery check-in or event change recalculates future weeks without overwriting imported activities.</div>`)}</div>`;
 }
 function course(){let ev=currentEvent(),r=getCourse(ev),climbs=r?.climbs||[],stats=courseStats(ev),dem=eventDemands(ev);return htmlHead('Route & terrain','Course intelligence','Import an original event GPX and inspect the measured profile, climbs and gradient exposure. Roads, surface quality and technicality are not inferred from GPX alone.')+
  `<div class="panel"><div class="panel-heading"><div><h2>Event route</h2><p>${r?'GPX analysed locally · '+r.originalCount.toLocaleString('en-GB')+' original points':'Route file required for track-based analysis'}</p></div><div class="inline-edit"><select id="courseEvent" aria-label="Choose event" style="background:#162a37;color:#fff;border:1px solid #355064;padding:10px;border-radius:7px">${eventOptionList()}</select>${action('↑ Upload GPX','choosegpx','small',`data-id="${e(ev.id)}"`)}</div></div>
@@ -226,12 +539,19 @@ function recovery(){let ch=latestCheckin(),risk=checkLevel(),riskcls=risk.level=
  ${panel('Check-in history',history.length?`<div class="table-wrap"><table><thead><tr><th>Date</th><th>Fatigue</th><th>Sleep</th><th>Pain</th><th>Advice</th></tr></thead><tbody>${history.map(c=>{let x=safety(c);return `<tr><td>${fmtDate(c.date)}</td><td>${c.fatigue}/5</td><td>${c.sleep} h</td><td>${c.pain}/10 ${e(c.painArea||'')}</td><td>${e(x.title)}</td></tr>`}).join('')}</tbody></table></div>`:'<div class="empty">No check-ins saved yet.</div>')}
  <p class="footnote">Each saved check-in updates the next 4 days of provisional session advice. For continuing symptoms, obtain medical advice; this app cannot confirm suitability to train through an injury.</p>`;
 }
-function activities(){let rides=state.activities.slice().sort((a,b)=>b.date.localeCompare(a.date)),recent=rides.filter(a=>daysBetween(a.date,iso(NOW()))<=28&&daysBetween(a.date,iso(NOW()))>=0),hours=recent.reduce((a,b)=>a+n(b.duration),0)/60;
- return htmlHead('Training history','Evidence before assumptions.','Import original Wahoo / Zwift ride files to give the coach recent training history. Files are processed locally; this trial does not sync accounts.')+
- `<div class="layout cols3">${stat('Logged activities',rides.length,'','Stored in this browser')}${stat('Last 28 days',round(hours,1),'hrs','Activity-recorded duration')}${stat('Longest logged ride',rides.length?round(Math.max(...rides.map(x=>n(x.distance))),1):'—','km','Trial history only')}</div>
- <section class="panel section-space"><div class="panel-heading"><div><h2>Ride diary</h2><p>Supports .FIT, .FIT.GZ, .TCX and time-recorded .GPX activities. Power and heart rate appear when recorded.</p></div><div class="btnrow">${action('↑ Import ride files','importridefiles','secondary small')}${action('Import CSV','importactivities','ghost small')}${action('+ Add ride','addactivity','small')}</div></div>${rides.length?`<div class="table-wrap"><table><thead><tr><th>Date</th><th>Session</th><th>Duration</th><th>Distance</th><th>Ascent</th><th>Power</th><th>HR</th><th>Source</th><th>RPE</th><th></th></tr></thead><tbody>${rides.map(a=>`<tr><td>${fmtDate(a.date)}</td><td><strong>${e(a.title)}</strong></td><td>${a.duration} min</td><td>${n(a.distance)} km</td><td>${n(a.ascent)||'—'} m</td><td>${n(a.power)||'—'} W</td><td>${n(a.avgHr)||'—'}</td><td>${e(a.source||'Manual')}</td><td>${n(a.rpe)||'—'}</td><td><button class="micro" data-act="removeactivity" data-id="${e(a.id)}">Remove</button></td></tr>`).join('')}</tbody></table></div>`:`<div class="empty"><div class="empty-graphic">↗</div><h3>Import your first activities</h3><p>Use the new Import ride files button for Wahoo or Zwift .FIT recordings, or enter a session manually.</p></div>`}
- <div class="section-space muted-note">Strava API data is not ingested: its June 2026 API terms restrict AI and analytics uses. Import your original recordings directly from Wahoo or Zwift. No raw file data is uploaded, GPS samples are not retained, and duplicate dates/times are skipped. This is not a live account sync.</div></section>
- ${panel('CSV sample format',`<code style="font-size:11px;display:block;white-space:pre-wrap;color:#bce0df">date,title,duration_min,distance_km,ascent_m,avg_power,rpe<br>2026-10-24,Gravel endurance,210,78,1100,155,6</code><div class="btnrow section-space">${action('Download CSV template','csvtemplate','secondary small')}</div>`)}`;
+function activities(){let rides=state.activities.slice().sort((a,b)=>b.date.localeCompare(a.date)),hist=RideWeaveCoach.history(state.activities,state.athlete,iso(NOW()),state.settings.historyCoverage||'partial');
+ const complete=(state.settings.historyCoverage||'partial')==='complete';
+ return htmlHead('Training history','Evidence before assumptions.','Your Wahoo, Zwift and manually logged rides help establish training volume and intensity. Mark whether the imported history is complete so the coach never mistakes gaps for rest.')+
+ `<div class="layout cols4">${stat('Logged activities',rides.length,'','Stored in this browser')}${stat('Last 28 days',hist.hours28,'hrs','Imported moving duration')}${stat('Recent power records',hist.powerCount,'','Last 56 days')}${stat('Normalised power',hist.npCount,'rides','Not always present in FIT files')}</div>
+ <section class="panel section-space"><div class="panel-heading"><h2>History coverage & coach confidence</h2><span class="badge ${hist.confidence==='none'?'warn':'green'}">${e(hist.confidence)}</span></div>
+ <p class="help-copy">The trainer uses imported rides to inform starting volume, but absence of rides in an incomplete import is <strong>not</strong> treated as rest. Select complete only when all workouts (including Zwift) in the last four weeks have been imported.</p>
+ <div class="btnrow">${action('History is partial','historycoverage',complete?'ghost small':'small',`data-coverage="partial"`)}${action('Last 4 weeks are complete','historycoverage',complete?'small':'ghost small',`data-coverage="complete"`)}</div>
+ <p class="tiny section-space">${e(hist.completenessWarning)} Power-derived training stress is not calculated unless both a recorded NP and a recently verified FTP are available. Missing sensor values are unknown, not zero.</p>
+ </section>
+ <section class="panel section-space"><div class="panel-heading"><div><h2>Ride diary</h2><p>Supports .FIT, .FIT.GZ, .TCX and timed .GPX. Missing sensor data is displayed as unavailable.</p></div><div class="btnrow">${action('↑ Import ride files','importridefiles','secondary small')}${action('Import CSV','importactivities','ghost small')}${action('+ Add ride','addactivity','small')}</div></div>
+ ${rides.length?`<div class="table-wrap"><table><thead><tr><th>Date</th><th>Session</th><th>Duration</th><th>Distance</th><th>Ascent</th><th>Power</th><th>NP</th><th>HR</th><th>RPE</th><th></th></tr></thead><tbody>${rides.map(a=>`<tr><td>${fmtDate(a.date)}</td><td><strong>${e(a.title)}</strong></td><td>${a.duration} min</td><td>${n(a.distance)} km</td><td>${n(a.ascent)||'—'} m</td><td>${n(a.power)||'—'} W</td><td>${a.normalizedPower??'—'} W</td><td>${n(a.avgHr)||'—'}</td><td>${n(a.rpe)||'—'} <button class="micro" data-act="editrpe" data-id="${e(a.id)}">Edit</button></td><td><button class="micro" data-act="removeactivity" data-id="${e(a.id)}">Remove</button></td></tr>`).join('')}</tbody></table></div>`:`<div class="empty"><h3>Build your first training baseline</h3><p>You can start without imported activities. RideWeave will suggest a varied introductory block, and learn from completed rides when you add them.</p></div>`}
+ <div class="section-space muted-note">Original FIT/TCX/GPX recordings are processed in your browser. No automatic Wahoo or Zwift sync is included. Export a JSON backup before importing many activities.</div></section>
+ ${panel('CSV sample format',`<code style="font-size:11px;display:block;white-space:pre-wrap;color:#bce0df">date,title,duration_min,distance_km,ascent_m,avg_power,rpe\n2026-10-24,Gravel endurance,210,78,1100,155,6</code><div class="btnrow section-space">${action('Download CSV template','csvtemplate','secondary small')}</div>`)}`;
 }
 function athlete(){let a=state.athlete;return htmlHead('Athlete profile','Make it fit your life.','Set a realistic weekly schedule, current performance reference and training preferences. These are starting inputs, not verified test results.')+
  `<div class="layout cols2"><section class="panel"><div class="panel-heading"><h2>Rider profile</h2><span class="badge">Local athlete</span></div><form id="athleteForm"><div class="form-grid"><div class="field"><label>Name or nickname</label><input name="name" value="${e(a.name)}" required maxlength="80"></div><div class="field"><label>Primary discipline</label><select name="discipline">${['Gravel & road','Gravel','Road','XC MTB','Enduro MTB','Time trial','Multi-discipline'].map(x=>`<option ${a.discipline===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Weight (kg)</label><input name="weight" type="number" min="30" max="250" step=".1" value="${a.weight}"></div><div class="field"><label>FTP reference (watts)</label><input name="ftp" type="number" min="40" max="650" value="${a.ftp}"></div><div class="field"><label>Recent typical training (hrs/week)</label><input name="baseHours" type="number" min="0" max="35" step=".5" value="${a.baseHours}"></div><div class="field"><label>Desired weekly training (hrs)</label><input name="targetHours" type="number" min="1" max="35" step=".5" value="${a.targetHours}"></div></div><label class="checkline"><input type="checkbox" name="ftpVerified" ${a.ftpVerified?'checked':''}> FTP has been recently tested/verified</label><div class="field"><label>Coaching notes / limitations</label><textarea name="notes">${e(a.notes)}</textarea></div><div class="section-space"><button class="btn" type="submit">Save rider profile</button></div></form></section>
@@ -251,7 +571,7 @@ function showModal(title,body){document.querySelector('.modal-backdrop')?.remove
 function closeModal(){document.querySelector('.modal-backdrop')?.remove()}
 function eventModal(id){let ev=id?state.events.find(x=>x.id===id):null,x=ev||{name:'',date:'2027-06-01',discipline:'Gravel',distance:'',ascent:'',priority:'C',goal:'',source:'User entered',feedPoints:''};showModal(ev?'Edit event':'Add event',`<form id="eventForm"><input type="hidden" name="id" value="${e(ev?.id||'')}"><div class="form-grid"><div class="field"><label>Event name</label><input name="name" required maxlength="100" value="${e(x.name)}"></div><div class="field"><label>Date</label><input name="date" type="date" required value="${e(x.date)}"></div><div class="field"><label>Discipline</label><select name="discipline">${['Gravel','Road','XC MTB','Enduro MTB','Time trial','Other'].map(d=>`<option ${x.discipline===d?'selected':''}>${d}</option>`).join('')}</select></div><div class="field"><label>Priority</label><select name="priority">${['A','B','C'].map(p=>`<option ${x.priority===p?'selected':''} value="${p}">${p} — ${p==='A'?'Primary target':p==='B'?'Secondary':'Training event'}</option>`).join('')}</select></div><div class="field"><label>Distance (km)</label><input name="distance" type="number" min="1" max="1000" step=".1" value="${x.distance??''}"></div><div class="field"><label>Ascent (m; if known)</label><input name="ascent" type="number" min="0" max="20000" value="${x.ascent??''}"></div><div class="field" style="grid-column:1/-1"><label>Personal objective</label><textarea name="goal">${e(x.goal)}</textarea></div><div class="field" style="grid-column:1/-1"><label>Route data provenance / notes</label><input name="source" value="${e(x.source)}"></div></div><div class="btnrow section-space"><button class="btn" type="submit">${ev?'Save changes':'Add to season'}</button>${ev?`<button class="btn danger" type="button" data-act="deleteevent" data-id="${e(ev.id)}">Delete event</button>`:''}</div></form>`)}
 function workoutModal(date){let s=sessionByDate(date),log=state.logs[date];if(!s)return;let watts=n(state.athlete.ftp),power=watts&&s.type==='Hard'?`Estimated work intervals near ${round(watts*(s.zone==='Threshold'?.98:s.zone==='Sweet spot'?.9:.82))} W using your reference FTP.`:'Use perceived exertion and heart rate as appropriate.';
- showModal(`${s.label} · ${fmtDate(s.date)}`,`<span class="badge">${e(s.type)} · ${e(s.priority)} priority</span><h2 style="margin:15px 0 4px">${e(s.title)}</h2><p class="muted">${s.minutes} min · ${e(s.zone)}</p><p class="help-copy">${e(s.desc)}</p><div class="muted-note">${e(power)} Current FTP may be historical. Workouts are a trial template, not a validated personal prescription.</div><div class="btnrow section-space">${s.type==='Hard'||s.type==='Easy'||s.type==='Long'?action('Download .zwo','exportzwo','secondary',`data-date="${s.date}"`):''}${action(log==='done'?'✓ Completed':'Mark complete','markdone','',`data-date="${s.date}"`)}${action(log==='missed'?'Missed':'Mark missed','markmissed','ghost',`data-date="${s.date}"`)}</div><p class="footnote">Marking complete records a schedule status only. Import or log an actual ride separately for true training-history calculations.</p>`)}
+ showModal(`${s.label} · ${fmtDate(s.date)}`,`<span class="badge">${e(s.type)} · ${e(s.priority)} priority</span><h2 style="margin:15px 0 4px">${e(s.title)}</h2><p class="muted">${s.minutes} min · ${e(s.zone)}</p><p class="help-copy">${e(s.desc)}</p><div class="muted-note">${e(power)} Current FTP may be historical. Sessions are provisional. Training is adjusted using recorded history, event proximity and recovery inputs; review effort by feel.</div><div class="btnrow section-space">${s.type==='Hard'||s.type==='Easy'||s.type==='Long'?action('Download .zwo','exportzwo','secondary',`data-date="${s.date}"`):''}${action(log==='done'?'✓ Completed':'Mark complete','markdone','',`data-date="${s.date}"`)}${action(log==='missed'?'Missed':'Mark missed','markmissed','ghost',`data-date="${s.date}"`)}</div><p class="footnote">Marking complete records a schedule status only. Import or log an actual ride separately for true training-history calculations.</p>`)}
 function addActivityModal(){showModal('Log activity',`<form id="activityForm"><div class="form-grid"><div class="field"><label>Date</label><input type="date" name="date" value="${iso(NOW())}" required></div><div class="field"><label>Session title</label><input name="title" required value="Cycling workout"></div><div class="field"><label>Duration (minutes)</label><input type="number" name="duration" min="1" max="2000" value="60" required></div><div class="field"><label>Distance (km)</label><input type="number" name="distance" min="0" step=".1" value="25"></div><div class="field"><label>Elevation (m)</label><input type="number" name="ascent" min="0" value="0"></div><div class="field"><label>Average power (W, optional)</label><input type="number" name="power" min="0"></div><div class="field"><label>Perceived exertion (1–10)</label><input type="number" name="rpe" min="1" max="10" value="5"></div></div><div class="section-space"><button class="btn" type="submit">Save activity</button></div></form>`)}
 function csvEscape(s){let t=String(s??'');return /[",\n\r]/.test(t)?'"'+t.replace(/"/g,'""')+'"':t}
 function download(name,content,mime='text/plain'){let blob=new Blob([content],{type:mime}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200)}
@@ -302,6 +622,7 @@ document.addEventListener('click',async ev=>{
  case 'prevweek':state.settings.weekOffset=clamp(n(state.settings.weekOffset)-1,-1,24);save();render();break;
  case 'nextweek':state.settings.weekOffset=clamp(n(state.settings.weekOffset)+1,-1,24);save();render();break;
  case 'thisweek':state.settings.weekOffset=0;save();render();break;
+  case 'jumpweek':state.settings.weekOffset=clamp(n(btn.dataset.week),0,23);save();render();break;
  case 'workout':workoutModal(date);break;
  case 'markdone':case 'markmissed':state.logs[date]=act==='markdone'?'done':'missed';save();closeModal();render();toast('Session status saved.');break;
  case 'rebalance':replanWeek();break;
@@ -315,6 +636,8 @@ document.addEventListener('click',async ev=>{
  case 'importactivities':document.getElementById('activityCsvFile').click();break;
  case 'importridefiles':document.getElementById('activityRideFiles').click();break;
  case 'addactivity':addActivityModal();break;
+  case 'historycoverage':state.settings.historyCoverage=btn.dataset.coverage==='complete'?'complete':'partial';save();render();toast('Training evidence setting updated; plan recalculated.');break;
+  case 'editrpe':{const a=state.activities.find(x=>x.id===id);if(!a)break;const raw=prompt('How hard was this ride overall? RPE 1 (very easy) to 10 (maximal), or blank to clear.',a.rpe||'');if(raw===null)break;if(raw.trim()==='')a.rpe=0;else if(Number.isInteger(+raw)&&+raw>=1&&+raw<=10)a.rpe=+raw;else {toast('Enter a whole number from 1 to 10.');break;}save();render();toast('Ride feedback updated.');break;}
  case 'removeactivity':if(confirm('Remove this activity?')){state.activities=state.activities.filter(x=>x.id!==id);save();render()}break;
  case 'csvtemplate':download('RideWeave_activity_template.csv','date,title,duration_min,distance_km,ascent_m,avg_power,rpe\r\n2026-10-24,Gravel endurance,210,78,1100,155,6\r\n','text/csv');break;
  case 'exportbackup':case 'backupQuick':download('RideWeave_backup_'+iso(NOW())+'.json',JSON.stringify(state,null,2),'application/json');toast('Backup downloaded.');break;
