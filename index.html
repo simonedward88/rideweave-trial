@@ -55,7 +55,7 @@
       <div class="sidebar-caption">YOUR WORKSPACE</div>
       <nav id="nav" aria-label="Main navigation"></nav>
       <div class="sidebar-bottom">
-        <div class="product-version"><span class="status-dot"></span> EVALUATION BUILD <b>v0.5.1</b></div>
+        <div class="product-version"><span class="status-dot"></span> EVALUATION BUILD <b>v0.5.2</b></div>
         <p>Personal, local-first trial. Your data stays in this browser unless you export it.</p>
       </div>
     </aside>
@@ -540,30 +540,51 @@ function fuelingEvidence(activities=[]){
  return {count:rates.length,verifiedComfortable:rates.length>=2?round(median(rates)):null};
 }
 function pace(ev,activities=[]){
- const km=roughDist(ev),ascent=roughAscent(ev),density=km>0?ascent/km:0,road=isRoad(ev);
- const recent=(activities||[]).filter(a=>{
+ const km=roughDist(ev),routeAscent=Math.max(0,number(ev?.route?.ascent)),enteredAscent=Math.max(0,number(ev?.ascent)),road=isRoad(ev),gravel=isGravel(ev);
+ const conflict=routeAscent>0&&enteredAscent>0&&Math.abs(enteredAscent-routeAscent)>Math.max(200,.20*enteredAscent);
+ // GPX smoothing sometimes undercounts climbing. Use a conservative scenario when figures differ;
+ // always expose both sources and flag the discrepancy rather than calling one measured truth.
+ const ascent=conflict?Math.max(routeAscent,enteredAscent):(routeAscent||enteredAscent),density=km>0?ascent/km:0;
+ const profile=Array.isArray(ev?.route?.climbs)?ev.route.climbs:[];
+ const steepCount=profile.filter(c=>number(c?.average)>=8&&number(c?.length)>=.25).length;
+ const terrain=String(ev?.discipline||'');
+ const surfaceFactor=road?1:(/mtb|mountain|xc/i.test(terrain)?0.70:(gravel?0.79:0.88));
+ const climbFactor=Math.exp(-.011*Math.min(40,density));
+ const steepFactor=clamp(1-.025*steepCount,.88,1);
+ const valid=(activities||[]).filter(a=>{
   const d=number(a.distance),mins=number(a.duration),speed=d/(mins/60);
-  return d>=25&&mins>=45&&mins<=900&&speed>=9&&speed<=40&&String(a.title||'').toLowerCase().indexOf('zwift')<0;
+  return d>=25&&mins>=45&&mins<=900&&speed>=9&&speed<=40&&
+   !/zwift|indoor|trainer|wattbike/i.test(String(a.title||'')+' '+String(a.discipline||''));
  });
- // Wahoo outdoor rides can have generic filenames, but that does not identify discipline.
- const flaggedOutdoor=recent.filter(a=>/ELEMNT|ROAM|BOLT|outdoor|gravel|road/i.test(String(a.title||'')));
- const evidenceRides=flaggedOutdoor.length?flaggedOutdoor:recent;
- const candidates=evidenceRides.map(a=>{
+ const tagged=valid.filter(a=>/ELEMNT|ROAM|BOLT|outdoor|gravel|road/i.test(String(a.title||'')));
+ const reference=tagged.length>=2?tagged:valid;
+ // Estimate a conservative road-equivalent baseline from recorded outdoor speeds.
+ // Ride surfaces are unknown: an upper-middle quantile reduces contamination from
+ // one exceptionally slow, technical ride without declaring other rides to be road.
+ const candidates=reference.map(a=>{
   const speed=number(a.distance)/(number(a.duration)/60),dr=number(a.ascent)/Math.max(1,number(a.distance));
-  const ascentRatio=clamp(Math.pow(1+.022*dr,1)/(1+.022*density),.74,1.33);
-  const lengthAdjustment=clamp(Math.pow(km/Math.max(20,number(a.distance)),-.045),.86,1.1);
-  const estimate=speed*ascentRatio*lengthAdjustment;
-  const similarity=1/(1+Math.abs(dr-density)/12+Math.abs(number(a.distance)-km)/Math.max(50,km));
-  return {estimate:clamp(estimate,10,38),weight:similarity,reference:a,dr,speed};
- });
- const estimate=candidates.length?candidates.reduce((a,b)=>a+b.estimate*b.weight,0)/candidates.reduce((a,b)=>a+b.weight,0):(road?23:17);
- const evidence=candidates.length>=5?'moderate':candidates.length>=2?'limited':'very limited';
- // Road/gravel labels are unknown for imported rides; broad ranges cover equipment and route uncertainty.
- const wide=evidence==='moderate'?.15:.23;
- const expected=clamp(estimate,road?13:10,road?34:29);
- const movingHours=km/Math.max(6,expected),stopMins=clamp(Math.round(movingHours*60*(km>=90?.09:.07)),8,80);
- const midpoint=round(movingHours+stopMins/60,2),low=round(midpoint*(1-wide),1),high=round(midpoint*(1+wide),1);
- return {km,ascent,density:round(density,1),referenceCount:candidates.length,confidence:evidence,expectedSpeed:round(expected,1),movingHours:round(movingHours,2),stoppedMinutes:stopMins,hours:midpoint,hoursLow:low,hoursHigh:high,assumptions:flaggedOutdoor.length?'Using recorded ELEMNT/outdoor-labelled rides where available; bike discipline, true effort and surface remain uncertain.':'No explicitly outdoor-labelled rides are available; treating recorded rides over 25 km as uncertain pace evidence until device and terrain are classified.'};
+  return {flat:clamp(speed*Math.exp(.011*Math.min(25,dr)),13,37),weight:1/(1+Math.abs(dr-8)/14)};
+ }).sort((a,b)=>a.flat-b.flat);
+ function weightedQuantile(values,q){
+  if(!values.length)return 23;
+  const total=values.reduce((s,v)=>s+v.weight,0);let seen=0;
+  for(const v of values){seen+=v.weight;if(seen>=total*q)return v.flat;}
+  return values[values.length-1].flat;
+ }
+ const baseline=candidates.length?clamp(weightedQuantile(candidates,.62),18,30):23;
+ const lengthFactor=clamp(Math.pow(Math.max(20,km)/70,-.05),.87,1.08);
+ const expected=clamp(baseline*surfaceFactor*climbFactor*steepFactor*lengthFactor,road?12:8,road?36:30);
+ const movingHours=km/Math.max(6,expected),stopMins=clamp(Math.round(movingHours*60*(road?.065:.105)),road?8:12,road?65:85);
+ const hours=round(movingHours+stopMins/60,2),confidence=candidates.length>=6?'moderate':candidates.length>=2?'limited':'very limited';
+ const width=clamp((confidence==='moderate'?.17:confidence==='limited'?.24:.33)+(conflict?.055:0)+(gravel?.035:0),.15,.45);
+ const severity=density*(road?1:1.38)+steepCount*2;
+ const difficulty=severity>=28?'Very demanding':severity>=17?'Demanding':severity>=9?'Moderate–demanding':'Moderate';
+ const sourceNote=conflict?`Entered/organiser ascent ${Math.round(enteredAscent)} m and smoothed GPX ascent ${Math.round(routeAscent)} m disagree; this scenario uses ${Math.round(ascent)} m pending route verification.`:
+  routeAscent>0?'Using smoothed GPX climbing estimate.':'Using manually entered climbing estimate.';
+ const assumptions=`Estimated from a ${round(baseline,1)} km/h road-equivalent reference${candidates.length?' derived from '+candidates.length+' outdoor ride summaries':' (generic assumption: no comparable outdoor rides)'}. Road/gravel factor ${Math.round(surfaceFactor*100)}%, climbing factor ${Math.round(climbFactor*100)}%, steep-climb factor ${Math.round(steepFactor*100)}%. These are modelling assumptions, not measurements of route surface or future fitness. ${sourceNote}`;
+ return {km,ascent,routeAscent,enteredAscent,ascentConflict:conflict,ascentSource:sourceNote,steepCount,difficulty,
+  density:round(density,1),referenceCount:candidates.length,confidence,expectedSpeed:round(expected,1),movingHours:round(movingHours,2),stoppedMinutes:stopMins,hours,hoursLow:round(hours*(1-width),1),hoursHigh:round(hours*(1+width),1),
+  factors:{baseline:round(baseline,1),surface:round(surfaceFactor,2),climbing:round(climbFactor,2),steep:round(steepFactor,2),distance:round(lengthFactor,2)},assumptions};
 }
 function plan(ev,athlete={},activities=[],weather=null){
  const base=pace(ev,activities),p={...base},weight=number(athlete.weight,75),fuel=fuelingEvidence(activities);
@@ -596,7 +617,7 @@ function plan(ev,athlete={},activities=[],weather=null){
  const warnings=[];
  if(fuel.count<2&&long)warnings.push('Carbohydrate tolerance is not confirmed by ride logs. Rehearse the recommended intake on long rides before targeting 75–90 g/h.');
  if(p.confidence==='very limited')warnings.push('Pace is a scenario, not a fitness prediction: insufficient comparable outdoor rides.');
- if(ev?.route?.distance&&ev?.ascent&&Math.abs(number(ev.ascent)-number(ev.route.ascent))>Math.max(200,.25*number(ev.ascent)))warnings.push('Organiser/entered climbing differs from GPX-calculated ascent; verify the route and elevation before relying on pace estimates.');
+ if(p.ascentConflict)warnings.push('Entered/organiser ascent and GPX ascent materially disagree. A conservative climbing scenario is used; verify the current event route before relying on the forecast.');
  if(weather&&Number.isFinite(weather.precipMm)&&weather.precipMm>2)warnings.push('Rain is currently forecast. Surfaces are not verified by the forecast.');
  if(weatherPenalty>0)warnings.push('Weather-based pace scenario reduces expected speed by '+Math.round(weatherPenalty*100)+'% for wind, rainfall and/or heat; this adjustment is a rough heuristic, not a validated aerodynamic/thermal model.');
  if(weather&&Number.isFinite(weather.temperature)&&weather.temperature>25)warnings.push('Warm conditions increase heat strain. Adjust pace, access to fluids and cooling to conditions.');
@@ -767,7 +788,8 @@ function strategy(){
  return htmlHead('Event intelligence','Coach-led event strategy','The coach recommends pace, carbohydrate and fluid targets from the route, recorded riding and published sports-nutrition guidance. Adjustments depend on actual weather forecasts and demonstrated tolerance, not arbitrary user-entered numbers.')+
  `<div class="panel"><div class="panel-heading"><div><h2>${e(ev.name)}</h2><p>${fmtDate(ev.date)} · ${e(ev.discipline)} · ${e(p.intensity)}</p></div><select id="strategyEvent" aria-label="Choose event" style="background:#162a37;color:#fff;border:1px solid #355064;padding:10px;border-radius:7px;max-width:54%">${eventOptionList()}</select></div>
  <div class="strategy-metrics"><div class="strategy-metric"><small>Coach-estimated elapsed time</small><strong>${p.p.hours} h</strong><em>Range ${p.p.hoursLow}–${p.p.hoursHigh} h</em></div><div class="strategy-metric"><small>Expected average moving speed</small><strong>${p.p.expectedSpeed} km/h</strong><em>${e(p.confidence)} confidence · ${p.p.referenceCount} reference rides</em></div><div class="strategy-metric"><small>Carbohydrates</small><strong>${p.carbsPerHour} g/h</strong><em>${p.totalCarbs} g total · guidance ${p.carbRange[0]}–${p.carbRange[1]} g/h</em></div><div class="strategy-metric"><small>Fluids</small><strong>${p.fluidMlPerHour} ml/h</strong><em>${p.totalFluid} L total · starting range ${p.fluidRange[0]}–${p.fluidRange[1]} ml/h</em></div></div>
- <div class="strategy-explain"><strong>Why this estimate?</strong> ${e(p.p.assumptions)} ${usesRoute?`Route file covers ${p.p.km} km with approximately ${p.p.ascent} m ascent.`:`Course uses the manually entered ${p.p.km} km and ${p.p.ascent} m ascent; add GPX to improve terrain assessment.`} Expected time includes a provisional ${p.p.stoppedMinutes} minutes for breaks. Speed estimates are not a guarantee; surface, tyres, wind, fitness and effort can change them markedly.</div>
+ <div class="strategy-explain"><strong>Why this estimate?</strong> ${e(p.p.assumptions)} ${usesRoute?`Route file covers ${p.p.km} km; pacing uses ${p.p.ascent} m climbing for the scenario.`:`Course uses the manually entered ${p.p.km} km and ${p.p.ascent} m ascent; add GPX to improve terrain assessment.`} Expected time includes a provisional ${p.p.stoppedMinutes} minutes for breaks. Speed estimates are not a guarantee; surface, tyres, wind, fitness and effort can change them markedly.</div>
+ <div class="strategy-evidence section-space" style="background:#152b37;border:1px solid #355264;border-radius:10px;padding:12px"><strong>Route-demand assessment: ${e(p.p.difficulty)}</strong> · ${p.p.density} m climbing per kilometre · ${p.p.steepCount} steep GPX climbs (≥8% average).<div class="tiny section-space">The ride can be physically harder even if the predicted total time is shorter. Road, gravel, climbing and steepness now affect estimated speed separately. ${p.p.ascentConflict?`Entered ascent ${Math.round(p.p.enteredAscent)} m versus calculated GPX ascent ${Math.round(p.p.routeAscent)} m; higher figure used as a conservative scenario.`:`Ascent estimate ${Math.round(p.p.ascent)} m.`}</div></div>
  <div class="section-space weather-summary"><h3>Weather and hydration adjustment</h3>${weatherBody}<div class="tiny section-space">Forecast available only when the event is within 15 days. A GPX start point is used for the forecast; only the event-start coordinate is sent to Open-Meteo, not personal ride files or the athlete profile. Fluid advice is provisional until you measure sweat losses in comparable conditions.</div></div>
  ${warning}
  <section class="section-space"><h3 class="subhead">Race nutrition and hydration</h3><div class="fuel-note">Begin fuelling during the first 20–30 minutes, then take frequent small portions. For this event the coach's provisional target is <strong>${p.carbsPerHour} g carbohydrate/hour</strong>. ${p.fuelEvidence.verifiedComfortable===null?'No comfortable carbohydrate intake has yet been documented in the ride diary, so higher intakes are not presumed safe or comfortable.':'Your ride diary has at least two comfortable fuelling records (median '+p.fuelEvidence.verifiedComfortable+' g/h).'} Use multiple-transportable-carbohydrate sources as intake increases; progressively rehearse in long rides.</div><p class="help-copy">Drinking: approximately ${p.fluidMlPerHour} ml/hour is a starting scenario, <strong>not a requirement to drink that much</strong>. Sip to thirst and conditions, track losses on comparable training days and avoid drinking beyond sweat losses. ${e(p.sodium)} Carrying capacity and confirmed refills matter; no water stop is assumed unless you enter it below.</p></section>
