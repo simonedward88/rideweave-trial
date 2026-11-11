@@ -1,3 +1,18 @@
+# RideWeave Focus v0.7 — coach-first redesign
+
+Browser-based cycling coaching trial: https://simonedward88.github.io/rideweave-trial/
+
+## New in v0.7 — RideWeave Focus
+- **Four primary destinations:** Today, Training, Events and Athlete. Desktop uses a simple sidebar; mobile uses a persistent four-tab bottom dock.
+- **Today:** one prominent next-session recommendation with a direct workout-detail action, A-priority event countdown, weekly volume, recovery status, coach's note and a compact upcoming-events list.
+- **Training:** the calendar stays central; day cards show the essentials and open full interval charts in a workout modal. The power-zone guide, coaching rationale and season progression are expandable on demand.
+- **Events:** scrollable event selector, quick access to the full event calendar and route/GPX tools. Advanced pacing assumptions, forecast, fuelling legs and references remain inside disclosures. Important warnings stay visible.
+- **Athlete:** a new hub for recent riding volume, recovery, ride history, rider profile, training availability and JSON backup/import controls. All original supporting screens remain accessible.
+- **Visual design:** subtler mint accents, less chrome, cleaner typography, calmer cards, more spacing and responsive layouts. Zwift zone colours remain specific to power charts.
+- **Compatibility:** existing `rideweave_trial_v1` localStorage data, JSON backups, FIT/TCX/GPX imports, ZWO exports, event GPX files and coaching engines are preserved. No private ride or recovery data was committed.
+- **Verification:** desktop 1440px and mobile 390px browser smoke tests across Today, Training, Events, Athlete, History, Recovery, Settings, Season and Routes; no JS errors or horizontal page overflow. Button-to-workout modal tested.
+- **Scope:** This release is a user-interface redesign. Historical-performance modelling, automated ride naming and FIT altitude reconciliation remain future enhancements, not completed features.
+
 # RideWeave v0.6 — Focused coaching interface
 
 Browser-based cycling coaching trial: https://simonedward88.github.io/rideweave-trial/
