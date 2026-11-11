@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0b121b" />
-  <title>RideWeave | Cycling coaching & event intelligence</title>
+  <title>RideWeave Focus | Your cycling coach</title>
   <style>
   .plan-insights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}
   .plan-insight{background:#172d38;border:1px solid #345060;border-radius:12px;padding:14px}
@@ -61,17 +61,112 @@ body{font-size:14px;line-height:1.54}main{max-width:1210px;padding:30px 36px 84p
 @media(max-width:420px){main{padding:20px 12px 70px}.focus-main h2{font-size:23px}.focus-overview span{font-size:10px}.focus-overview strong{font-size:16px}.focus-target>strong{font-size:31px}.strategy-metric{padding:12px}.strategy-metric strong{font-size:20px}.rw-disclosure{padding:0 13px}}
 .focus-recovery{align-self:start}.daycard.is-rest{background:#13232d;opacity:.74}.daycard.is-rest .daycard-detail{display:none}.daycard .daycard-detail>div{display:none}.daycard .workload-chip{background:transparent;border:0;padding:3px 0;margin-top:5px;color:#b0c5ce}.rw-warning-list{margin:7px 0 0;padding-left:18px}.rw-warning-list li+li{margin-top:5px}
 @media print{.nav-more,.focus-target .btn{display:none!important}details.rw-disclosure:not([open]) > :not(summary){display:block!important}.rw-disclosure{page-break-inside:avoid}.focus-hero{background:#fff;color:#111;border-color:#aaa}.focus-main h2{color:#111}}
+
+/* RideWeave Focus v0.7 — a coach-first presentation, with detail on demand */
+:root{--lime:#b7dfa8;--surface:#14222b;--card:#182932;--stroke:#293b46;--muted:#96acb7;--white:#edf5f3}
+body{background:#0c151c;color:var(--white);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.brandmark{display:flex;align-items:center;justify-content:center;white-space:nowrap;min-width:42px;flex-shrink:0;font-size:16px;letter-spacing:-1px}.brandmark span{font-size:15px}
+html,body{max-width:100%;overflow-x:clip}
+.today-stat-button{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%}.today-stat-button:hover{border-color:#6b9b83;background:#1b3232}
+.sidebar{background:#0f1b24;border-right:1px solid #21333e}
+.brand{margin-bottom:40px}.brandmark{border-radius:12px;background:#223a38;color:#d9f2d1;border:1px solid #466255}
+.sidebar-caption{font-size:10px;letter-spacing:1.5px;color:#718c9a}
+.nav-link{font-weight:550;color:#9cb2bf;margin-bottom:4px;padding:12px 14px;transition:background .16s}
+.nav-link.active{background:#253b37;color:#dbf4d6}.nav-link.active .nav-ico{color:#b7dfa8}
+.nav-ico{font-size:19px;width:24px}
+.sidebar-bottom{border-top:1px solid #20323c;margin-top:auto}
+.topbar{height:66px;background:rgba(12,21,28,.96);border-color:#22333e;padding:0 38px}
+.top-actions #backupQuick{display:none}
+.user-avatar{width:32px;height:32px;background:#273c3a;border:1px solid #3d5b54;color:#b7dfa8}
+main{max-width:1175px;padding:40px 42px 90px}
+.h1{font-size:clamp(27px,3.6vw,38px);letter-spacing:-1.1px}
+.subtitle{margin-bottom:25px;color:#94aeb7;line-height:1.55}
+.eyebrow{font-size:10px;letter-spacing:1.4px;color:#9dbba7}
+.panel{background:#14232b;border-color:#2a3b44;border-radius:16px;padding:23px}
+.panel-inner,.stat{border-color:#2c3f47;background:#182831;border-radius:14px}
+.btn{font-size:12.5px;min-height:40px;padding:11px 16px;border-radius:10px;background:#b7dfa8;color:#11271d}
+.btn:hover{background:#d4efca}.btn.ghost,.ghost-btn{border-color:#344b52;color:#b6cbd0;background:transparent}
+.btn.ghost:hover{background:#24363e}.btn.secondary{background:#27423c;border-color:#3c5a4d;color:#dff0dc}
+.focus-header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:27px}
+.focus-header h1{font-size:clamp(38px,5.6vw,53px);letter-spacing:-2px;line-height:1.05;margin:10px 0 8px;font-weight:690}
+.focus-header p:last-child{color:#93abb7;margin:0;font-size:14px}
+.focus-kicker{font-size:11px;color:#95c8a9;letter-spacing:1.2px;text-transform:uppercase;font-weight:750;margin:0}
+.focus-header-mark{display:grid;place-items:center;border:1px solid #2c434b;border-radius:14px;color:#9ec8b3;font-weight:800;letter-spacing:-1.2px;width:50px;height:50px;flex-shrink:0;background:#162630}
+.today-session{display:grid;grid-template-columns:minmax(0,1fr) 218px;gap:25px;min-height:266px;padding:33px 34px;background:linear-gradient(120deg,#213c37,#192d31 55%,#152530);border:1px solid #3a5b50;border-radius:20px}
+.today-session.requires-attention{background:linear-gradient(120deg,#392e2a,#202a30 63%,#182832);border-color:#725747}
+.today-session-copy{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+.today-eyebrow{font-size:10px;color:#c5dbd1;letter-spacing:1.3px;font-weight:750;display:flex;align-items:center;gap:9px}
+.today-dot{width:7px;height:7px;background:#b5e19e;border-radius:100%}
+.requires-attention .today-dot{background:#ffcd8c}
+.today-session h2{font-weight:700;letter-spacing:-.95px;font-size:clamp(25px,3.8vw,37px);margin:19px 0 8px;line-height:1.15}
+.today-session-copy>p{color:#b2c8c7;max-width:550px;font-size:13px;line-height:1.55;margin:14px 0 0}
+.today-pills{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:8px}
+.today-pills span{font-size:11px;padding:6px 10px;border:1px solid #48675c;background:#254139;border-radius:30px;color:#dcf1e0}
+.today-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:auto;padding-top:24px}
+.today-next-event{border-left:1px solid #476055;padding:3px 0 1px 26px;display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.today-next-event>strong{font-size:46px;letter-spacing:-1.7px;line-height:1.1;color:#d8f1ca}
+.today-next-event>strong small{font-size:13px;color:#b5ccbd;letter-spacing:0;font-weight:450}
+.today-next-event .event-title{font-size:13px;font-weight:720;line-height:1.5}
+.today-next-event .event-date{font-size:11px;color:#9fb8bb}
+.today-next-event .btn{margin-top:auto}
+.today-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:15px}
+.today-stat{padding:19px 19px 17px;background:#14232b;border:1px solid #283c44;border-radius:14px;min-width:0}
+.today-stat>span{color:#93aab5;font-size:11px}
+.today-stat strong{display:block;font-size:20px;font-weight:680;letter-spacing:-.35px;margin:9px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.today-stat strong small{font-size:11px;font-weight:450;color:#9bb3b6;letter-spacing:0}
+.today-stat p{color:#879faa;font-size:11px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.today-bottom{display:grid;grid-template-columns:1.05fr 1fr;gap:13px;margin-top:13px}
+.today-coach-note,.today-coming-up{border:1px solid #293b44;border-radius:15px;padding:22px 23px;background:#14232b;min-width:0}
+.focus-card-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.focus-card-heading h2{font-size:15px;font-weight:650;margin:0}
+.coach-symbol{font-size:19px;color:#b8dfa8;margin-right:auto}
+.coach-symbol+h2{margin-right:auto}
+.today-coach-note p{color:#aec3c7;line-height:1.65;font-size:13px;margin:0 0 13px}
+.quiet-link{border:0;background:none;color:#b7dfad;font-size:12px;font-weight:700;padding:4px 0;cursor:pointer}
+.upcoming-event{border-top:1px solid #2a3c44;display:flex;align-items:center;gap:13px;padding:12px 0}
+.upcoming-date{font-size:10px;color:#9bb6bb;text-align:center;min-width:34px}
+.upcoming-date b{display:block;color:#e9f3f0;font-size:21px}
+.upcoming-event>span:nth-child(2){flex:1;min-width:0}
+.upcoming-event>span:nth-child(2) strong{font-size:12px;font-weight:650;display:block}
+.upcoming-event>span:nth-child(2) small{font-size:11px;color:#8ea5ae;display:block;margin-top:3px}
+.rw-mini-disclosure{margin:3px 0 16px}.rw-mini-disclosure summary{cursor:pointer;color:#91acb5;font-size:12px;list-style:none}.rw-mini-disclosure summary::before{content:'+';font-size:16px;margin-right:7px}
+.rw-mini-disclosure[open] summary::before{content:'−'}
+.daycard{border-radius:12px;padding:14px 12px}.daycard-title{font-size:12px;line-height:1.45}.daycard-detail{font-size:11px;color:#9baebb}.daycard .workload-chip{margin-top:10px;font-size:10px}.daycard-footer{margin-top:11px}
+.schedule{gap:8px}.roadmap-button{border-radius:10px}
+.event-switcher{display:flex;gap:9px;overflow:auto;margin:-3px 0 15px;padding-bottom:4px;scrollbar-width:thin}
+.event-switch{font:inherit;color:#bed1d2;background:#152630;border:1px solid #2b414a;border-radius:12px;padding:13px 17px;text-align:left;min-width:180px;max-width:235px;cursor:pointer;flex:0 0 auto}
+.event-switch.is-selected{background:#254138;color:#e4f2e4;border-color:#789c7b}
+.event-switch>span,.event-switch>small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.event-switch>span{font-size:12px;font-weight:680}.event-switch>small{color:#8fa7ab;font-size:10px;margin-top:6px}
+.event-switch.is-selected>small{color:#bfd7cb}
+.event-tools{margin-bottom:20px}.strategy-metrics{gap:10px}
+.athlete-intro{display:flex;gap:17px;align-items:center;padding:23px;background:#182b32;border:1px solid #2c4748;border-radius:17px}
+.athlete-avatar{display:grid;place-items:center;width:56px;height:56px;border-radius:15px;background:#2c4841;color:#d7edcd;font-size:23px;font-weight:750;flex-shrink:0}
+.athlete-intro>div{flex:1;min-width:0}.athlete-intro h2{font-size:22px;margin:0 0 5px}.athlete-intro p{color:#9eb5bc;margin:0;font-size:12px;line-height:1.5}
+.athlete-stats{margin:13px 0 18px}
+.athlete-links{border:1px solid #2b3d44;background:#14232b;border-radius:16px;overflow:hidden}
+.athlete-link{display:flex;align-items:center;gap:16px;border:0;border-bottom:1px solid #2c3e46;padding:19px 22px;background:none;color:#eaf4f2;text-align:left;width:100%;cursor:pointer;font:inherit}
+.athlete-link:last-child{border-bottom:0}.athlete-link:hover{background:#1c3036}
+.athlete-link>span:nth-child(2){flex:1}.athlete-link strong{font-size:14px;display:block;font-weight:630}.athlete-link small{display:block;margin-top:5px;color:#8ba6b0;font-size:11px}
+.athlete-link-icon{font-size:21px;color:#a5d3b0;width:27px}.athlete-link>b{font-size:22px;font-weight:400;color:#a5b9bb}
+.mobile-dock{display:none}
+@media(max-width:1050px){main{padding:30px 28px 100px}.today-session{grid-template-columns:minmax(0,1fr) 185px;padding:27px 25px}.today-next-event{padding-left:20px}}
+@media(max-width:870px){.topbar{height:57px;padding:0 22px}.sidebar{display:none!important}.menu-toggle{display:none!important}.content-area{width:100%;min-width:0}.mobile-dock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:fixed;bottom:0;left:0;right:0;z-index:60;background:rgba(13,24,30,.97);backdrop-filter:blur(20px);border-top:1px solid #2c4349;padding:7px 6px calc(7px + env(safe-area-inset-bottom))}.dock-link{display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;min-height:52px;color:#90aab5;text-decoration:none;font-size:10px;border-radius:10px}.dock-link.active{color:#d2eccc;background:#234039}.dock-icon{font-size:21px;line-height:24px}.topdate{font-size:11px}main{padding-bottom:calc(108px + env(safe-area-inset-bottom))}}
+@media(max-width:650px){main{padding:26px 16px 106px}.focus-header h1{font-size:39px}.focus-header-mark{width:43px;height:43px}.today-session{grid-template-columns:minmax(0,1fr);padding:25px 21px;gap:25px}.today-next-event{border-left:0;border-top:1px solid #4b655c;padding:19px 0 0;display:grid;grid-template-columns:1fr auto;align-items:center;gap:7px}.today-next-event>.today-eyebrow,.today-next-event>.event-title,.today-next-event>.event-date{grid-column:1}.today-next-event>strong{grid-column:2;grid-row:1/3;font-size:35px}.today-next-event .btn{grid-column:2;grid-row:3;margin:0}.today-stats{grid-template-columns:1fr 1fr}.today-stat:nth-child(3){grid-column:1/-1}.today-bottom{grid-template-columns:1fr}.athlete-intro{flex-wrap:wrap}.athlete-intro .btn{width:100%}.event-switch{min-width:160px}.daycard{padding:13px}}
+@media(max-width:420px){.topdate{display:none}.focus-header-mark{display:none}.today-session h2{font-size:27px}.today-stat{padding:14px}.today-stat strong{font-size:17px}.today-actions .btn{flex:1}.today-next-event{grid-template-columns:1fr auto}.upcoming-event{gap:9px}}
+@media print{.mobile-dock{display:none!important}.today-session{background:#fff!important;color:#111!important}.today-stat,.today-coach-note,.today-coming-up{background:#fff!important;color:#111!important}}
+
 </style>
 </head>
 <body>
   <div class="shell">
     <aside class="sidebar">
       <a class="brand" href="#dashboard"><span class="brandmark">R<span>∕</span>W</span><span><strong>RIDE<span class="brand-light">WEAVE</span></strong><small>COACHING INTELLIGENCE</small></span></a>
-      <div class="sidebar-caption">YOUR WORKSPACE</div>
+      <div class="sidebar-caption">YOUR COACH</div>
       <nav id="nav" aria-label="Main navigation"></nav>
       <div class="sidebar-bottom">
-        <div class="product-version"><span class="status-dot"></span> EVALUATION BUILD <b>v0.6</b></div>
-        <p>Personal, local-first trial. Your data stays in this browser unless you export it.</p>
+        <div class="product-version"><span class="status-dot"></span> FOCUS EDITION <b>v0.7</b></div>
+        <p>Private by design. Your training data stays in this browser.</p>
       </div>
     </aside>
     <div class="content-area">
@@ -83,6 +178,7 @@ body{font-size:14px;line-height:1.54}main{max-width:1210px;padding:30px 36px 84p
       <main id="app" tabindex="-1"></main>
     </div>
   </div>
+  <nav class="mobile-dock" id="mobileDock" aria-label="Primary navigation"></nav>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <input type="file" id="gpxFile" accept=".gpx,application/gpx+xml,application/xml,text/xml" hidden />
   <input type="file" id="activityCsvFile" accept=".csv,text/csv" hidden />
@@ -650,7 +746,10 @@ return {plan,pace,forecastAvailability,fetchWeather,getCachedWeather,fuelingEvid
 const KEY='rideweave_trial_v1';
 const LEGACY_KEY='pacestrata_trial_v1';
 const DAY=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-const NAV=[['dashboard','◈','Today'],['season','⚑','Season'],['training','▦','Training'],['course','⌁','Routes'],['strategy','◉','Events'],['recovery','♡','Recovery'],['activities','↗','History'],['athlete','⚙','Settings']];
+const NAV=[['dashboard','⌂','Today'],['training','▦','Training'],['strategy','⚑','Events'],['athlete','◯','Athlete']];
+const SECONDARY_PAGES={season:['strategy','Calendar'],course:['strategy','Routes'],recovery:['athlete','Recovery'],activities:['athlete','History'],profile:['athlete','Settings']};
+const routeParent=id=>SECONDARY_PAGES[id]?.[0]||id;
+const routeLabel=id=>SECONDARY_PAGES[id]?.[1]||NAV.find(x=>x[0]===id)?.[2]||'Today';
 const NOW=()=>new Date();
 const iso=d=>{let x=new Date(d); return [x.getFullYear(),String(x.getMonth()+1).padStart(2,'0'),String(x.getDate()).padStart(2,'0')].join('-')};
 const fromISO=s=>new Date(String(s)+'T12:00:00');
@@ -743,20 +842,25 @@ function parseGPX(xmlText){if(xmlText.length>20*1024*1024)throw Error('GPX excee
 }
 function dashboard(){
  const today=iso(NOW()), event=primaryEvent(), left=Math.max(0,daysBetween(today,event.date));
- const wp=weekPlan(),health=checkLevel(),healthStyle=health.level==='danger'?'danger':health.level==='warn'?'warn':'';
- const future=state.events.filter(x=>daysBetween(today,x.date)>=0).sort((a,b)=>a.date.localeCompare(b.date));
- const next=wp.sessions.filter(x=>x.date>=today&&x.type!=='Rest')[0]||wp.sessions.find(x=>x.type!=='Rest');
- const total=wp.sessions.reduce((a,x)=>a+(x.type==='Event'?0:x.minutes),0);
- const completed=wp.sessions.filter(x=>state.logs[x.date]==='done').reduce((a,x)=>a+x.minutes,0);
- return htmlHead('YOUR COACH','Your next move','A clear plan for today, with the detail there when you need it.')+
- `<section class="focus-hero"><div class="focus-main"><span class="eyebrow">NEXT ON YOUR PLAN</span>
- ${next?`<div class="focus-meta">${fmtDate(next.date)} <span>·</span> ${next.minutes} min <span>·</span> ${e(next.zone)}</div><h2>${e(next.title)}</h2><p>${e(next.desc)}</p>`:`<h2>Your week is ready</h2><p>Open your training calendar to see the next phase of your plan.</p>`}
- <div class="btnrow">${action('View training plan','training','')}${next&&next.type==='Hard'?action('Export Zwift workout','exportzwo','ghost',`data-date="${next.date}"`):''}</div></div>
- <div class="focus-target"><span class="eyebrow">A-PRIORITY EVENT</span><strong>${left} <small>days</small></strong><div>${e(event.name)}</div><small>${fmtDate(event.date)}</small>${action('Event strategy','strategy','ghost small')}</div></section>
- <div class="focus-overview section-space"><div><span>This week's plan</span><strong>${round(total/60,1)} h</strong></div><div><span>Marked complete</span><strong>${round(completed/60,1)} h</strong></div><div><span>Current phase</span><strong>${e(wp.focus)}</strong></div></div>
- <div class="layout cols2 section-space"><section class="panel focus-recovery"><div class="panel-heading"><h2>Recovery check</h2>${action('Update check-in','recovery','ghost small')}</div><div class="health-screen ${healthStyle}"><div class="health-icon">${health.level==='danger'?'⚠':health.level==='good'?'✓':'♡'}</div><div><strong>${e(health.title)}</strong><p>${e(health.reason)}</p></div></div><div class="tiny">Recovery advice is not medical clearance. Seek urgent assessment for alarming symptoms.</div></section>
- ${panel('Coming up',future.slice(0,3).map(x=>`<div class="event-row"><div class="date-tile"><small>${month(x.date)}</small><strong>${fromISO(x.date).getDate()}</strong></div><div class="event-main"><div class="event-name">${e(x.name)}</div><div class="event-meta">${e(x.discipline)} · ${e(x.distance||'—')} km</div></div>${badge(x.priority)}</div>`).join('')||'<div class="empty">Add your next event.</div>',action('All events','season','ghost small'))}</div>
- <details class="rw-disclosure section-space"><summary>More about your training and targets <span>Baseline, FTP and route information</span></summary><div class="layout cols3 section-space">${stat('Time available',round(state.athlete.trainingDays.reduce((a,b)=>a+b,0)/60,1),'hrs/week','Edit in athlete profile')}${stat('FTP reference',n(state.athlete.ftp)||'—','W',state.athlete.ftpVerified?'Recently verified':'Historical / unverified')}${stat('Main event route',courseStats(event).distance,'km',`${courseStats(event).ascent||'—'} m climbing`)}</div><div class="btnrow section-space">${action('Season overview','season','secondary small')}${action('Course details','course','ghost small')}${action('Athlete settings','athlete','ghost small')}</div></details>`;
+ const wp=sessionsForWeek(weekStart(today)), health=checkLevel();
+ const upcoming=[...wp.sessions,...sessionsForWeek(addDays(wp.start,7)).sessions].filter(x=>x.date>=today&&x.type!=='Rest'&&x.type!=='Recorded'&&x.minutes>0);
+ const next=upcoming[0];
+ const planned=wp.sessions.filter(x=>!['Event','Recorded','Rest'].includes(x.type)).reduce((a,x)=>a+x.minutes,0);
+ const completed=wp.sessions.filter(x=>state.logs[x.date]==='done'||x.recorded).reduce((a,x)=>a+x.minutes,0);
+ const actual=state.activities.filter(x=>x.date>=wp.start&&x.date<=addDays(wp.start,6)).reduce((a,x)=>a+n(x.duration),0);
+ const hasConcern=['warn','danger','watch'].includes(health.level);
+ const nextDate=next?fmtDate(next.date):'';
+ const note=hasConcern?health.reason:wp.reasons?.find(x=>x.length<260)||'Protect your easy days, build repeatable volume and let the longer rides develop naturally.';
+ return `<div class="focus-header"><div><p class="focus-kicker">YOUR COACH · ${e(NOW().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'}))}</p><h1>Today</h1><p>A clear next step, with the details when you need them.</p></div><span class="focus-header-mark" aria-hidden="true">R/W</span></div>
+ <section class="today-session ${hasConcern?'requires-attention':''}">
+ <div class="today-session-copy"><div class="today-eyebrow"><span class="today-dot"></span>${hasConcern?'RECOVERY FIRST':'NEXT ON YOUR PLAN'}</div>
+ ${hasConcern?`<h2>${e(health.title)}</h2><p>${e(health.reason)}</p><div class="today-pills"><span>Review symptoms before training</span></div><div class="today-actions">${action('Review recovery','recovery','')}${action('Training calendar','training','ghost')}</div>`:
+ next?`<h2>${e(next.title)}</h2><div class="today-pills"><span>${e(nextDate)}</span><span>${next.minutes} min</span><span>${e(next.zone)}</span></div><p>${e(next.desc)}</p><div class="today-actions">${action('View workout','workout','',`data-date="${e(next.date)}"`)}${action('Training calendar','training','ghost')}</div>`:
+ `<h2>You're up to date</h2><p>No more sessions are scheduled in the current planning window.</p><div class="today-actions">${action('See your training','training','')}</div>`}
+ </div><div class="today-next-event"><span class="today-eyebrow">A-PRIORITY TARGET</span><strong>${left}<small> days</small></strong><span class="event-title">${e(event.name)}</span><span class="event-date">${fmtDate(event.date)}</span>${action('Event strategy','strategy','ghost small')}</div></section>
+ <div class="today-stats"><div class="today-stat"><span>This week</span><strong>${round(actual/60,1)} h <small>recorded</small></strong><p>${round(planned/60,1)} h planned workouts</p></div><div class="today-stat"><span>Training focus</span><strong>${e(wp.focus)}</strong><p>${e(wp.theme)}</p></div><button class="today-stat today-stat-button" data-act="recovery" type="button"><span>Recovery</span><strong>${e(health.level==='unknown'?'Check in':health.level==='good'?'On track':'Review needed')}</strong><p>${e(health.level==='unknown'?'No recent check-in':health.title)}</p></button></div>
+ <div class="today-bottom"><section class="today-coach-note"><div class="focus-card-heading"><span class="coach-symbol">✳</span><h2>Coach's note</h2></div><p>${e(note)}</p><button class="quiet-link" data-act="training">Why this week's plan <span aria-hidden="true">→</span></button></section>
+ <section class="today-coming-up"><div class="focus-card-heading"><h2>Coming up</h2>${action('See all','season','ghost small')}</div>${state.events.filter(x=>daysBetween(today,x.date)>=0).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,2).map(x=>`<div class="upcoming-event"><span class="upcoming-date">${month(x.date)}<b>${fromISO(x.date).getDate()}</b></span><span><strong>${e(x.name)}</strong><small>${e(x.discipline)} · ${n(x.distance)} km</small></span>${badge(x.priority)}</div>`).join('')||'<p class="muted">No events scheduled yet.</p>'}</section></div>`;
 }
 
 function season(){let main=primaryEvent();let rows=eventsSorted().map(x=>{let d=daysBetween(iso(NOW()),x.date);let isPast=d<0;let stats=courseStats(x);return `<div class="event-row"><div class="date-tile"><small>${month(x.date)}</small><strong>${fromISO(x.date).getDate()}</strong></div><div class="event-main"><div class="event-name">${e(x.name)} ${isPast?'<span class="badge">Past</span>':''}</div><div class="event-meta">${e(x.discipline)} · ${stats.distance||'—'} km · ${stats.ascent||'—'} m climbing ${x.route?'· GPX attached':'· indicative'} · ${fmtDate(x.date)}</div><div class="event-desc">${e(x.goal)}</div><div class="btnrow" style="margin-top:10px"><button class="micro" data-act="selectevent" data-id="${e(x.id)}">Analyse</button><button class="micro" data-act="editevent" data-id="${e(x.id)}">Edit</button><button class="micro" data-act="setprimary" data-id="${e(x.id)}">Make A target</button><button class="micro" data-act="choosegpx" data-id="${e(x.id)}">Import GPX</button></div></div>${badge(x.priority)}</div>`}).join('');
@@ -775,9 +879,9 @@ function training(){
  return htmlHead('Adaptive training','Your training week','A practical plan that adapts to your rides and recovery.')+
  `<div class="focus-overview section-space"><div><span>Training phase</span><strong>${e(wp.focus)}</strong></div><div><span>Planned hours</span><strong>${round(planned/60,1)} h</strong></div><div><span>Workout load</span><strong>${weekLoad} <small>pts</small></strong></div></div>
  <section class="panel section-space"><div class="panel-heading"><div><h2>Training calendar</h2><p>Week of ${fmtDate(wp.start)} · ${e(wp.focus)} · ${e(wp.theme)}</p></div><div class="week-controls"><button class="btn small ghost" data-act="prevweek">← Previous</button><button class="btn small secondary" data-act="thisweek">Today</button><button class="btn small ghost" data-act="nextweek">Next →</button></div></div>
- ${RideWeaveWorkouts.zoneLegend(null,true)}
- <div class="schedule">${wp.sessions.map(s=>{const log=state.logs[s.date],w=RideWeaveWorkouts.make(s,state.athlete),f=RideWeaveWorkouts.practice(s,wp.weekIndex,state.activities);return `<div class="daycard ${s.type==='Rest'?'is-rest':''} ${s.date===iso(NOW())?'today':''}"><div class="daycard-head"><strong>${DAY[(fromISO(s.date).getDay()+6)%7]}</strong><span>${fromISO(s.date).getDate()} ${month(s.date).toLowerCase()}</span></div><div class="daycard-title"><span class="type-dot ${e(s.type)}"></span>${e(s.title)}</div><div class="daycard-detail">${s.minutes} min · ${e(s.zone)}<div style="margin-top:6px">${e(s.desc)}</div></div>${w?`<div class="workload-chip">${w.stress} ${w.ftpCurrent?'estimated TSS':'provisional stress pts'}</div>${RideWeaveWorkouts.profile(w,true)}${f?`<div class="tiny">Fuel practice ${f.gramsPerHour} g/h</div>`:''}`:''}<div class="daycard-footer">${s.recorded?'<span class="badge green">Imported actual</span>':log?`<span class="badge ${log==='done'?'green':'warn'}">${log==='done'?'Completed':'Missed'}</span>`:`${s.type!=='Rest'?`<button class="micro" data-act="workout" data-date="${s.date}">Details</button>`:''}`}</div></div>`}).join('')}</div>
- <div class="btnrow section-space">${action('Rebalance remaining week','rebalance','secondary small')}${action('Edit availability','athlete','ghost small')}${action('Export plan CSV','exportplan','ghost small')}</div>
+ <details class="rw-mini-disclosure"><summary>Power-zone guide</summary>${RideWeaveWorkouts.zoneLegend(null,true)}</details>
+ <div class="schedule">${wp.sessions.map(s=>{const log=state.logs[s.date],w=RideWeaveWorkouts.make(s,state.athlete),f=RideWeaveWorkouts.practice(s,wp.weekIndex,state.activities);return `<div class="daycard ${s.type==='Rest'?'is-rest':''} ${s.date===iso(NOW())?'today':''}"><div class="daycard-head"><strong>${DAY[(fromISO(s.date).getDay()+6)%7]}</strong><span>${fromISO(s.date).getDate()} ${month(s.date).toLowerCase()}</span></div><div class="daycard-title"><span class="type-dot ${e(s.type)}"></span>${e(s.title)}</div><div class="daycard-detail">${s.minutes} min · ${e(s.zone)}</div>${w?`<div class="workload-chip">${w.stress} ${w.ftpCurrent?'estimated TSS':'provisional stress pts'}</div>`:''}<div class="daycard-footer">${s.recorded?'<span class="badge green">Imported actual</span>':log?`<span class="badge ${log==='done'?'green':'warn'}">${log==='done'?'Completed':'Missed'}</span>`:`${s.type!=='Rest'?`<button class="micro" data-act="workout" data-date="${s.date}">Details</button>`:''}`}</div></div>`}).join('')}</div>
+ <div class="btnrow section-space">${action('Rebalance remaining week','rebalance','secondary small')}${action('Edit availability','profile','ghost small')}${action('Export plan CSV','exportplan','ghost small')}</div>
  ${health.level==='danger'?'<div class="muted-note danger-note section-space">Safety screening paused training recommendations. Seek appropriate clinical support.</div>':health.level==='warn'?`<div class="muted-note warn-note section-space">${e(health.reason)}</div>`:''}
  </section>
  <details class="rw-disclosure section-space"><summary>Why your coach chose this week <span>Training evidence and recovery adjustments</span></summary>
@@ -809,8 +913,10 @@ function strategy(){
  const legs=p.legs.map(l=>`<tr><td>${l.from}–${l.to} km</td><td>${l.km} km</td><td>${round(l.hours,1)} h</td><td>${l.carbs} g</td><td>${l.fluid} ml</td></tr>`).join('');
  const warning=p.warnings.length?`<div class="muted-note warn-note section-space"><strong>Coach notes</strong><ul class="rw-warning-list">${p.warnings.map(w=>`<li>${e(w)}</li>`).join('')}</ul></div>`:'';
  const r=ev?.route,usesRoute=!!r;
- return htmlHead('Event strategy','Your event plan','Pace, fuelling and preparation for your selected route.')+
- `<div class="panel"><div class="panel-heading"><div><h2>${e(ev.name)}</h2><p>${fmtDate(ev.date)} · ${e(ev.discipline)} · ${e(p.intensity)}</p></div><select id="strategyEvent" aria-label="Choose event" style="background:#162a37;color:#fff;border:1px solid #355064;padding:10px;border-radius:7px;max-width:54%">${eventOptionList()}</select></div>
+ return htmlHead('YOUR SEASON','Events','See what matters next. Open a route, strategy or the full event calendar.')+
+ `<div class="event-switcher">${eventsSorted().map(x=>`<button type="button" class="event-switch ${x.id===ev.id?'is-selected':''}" data-act="eventselect" data-id="${e(x.id)}"><span>${e(x.name)}</span><small>${fmtDate(x.date)}</small></button>`).join('')}</div>
+ <div class="btnrow event-tools">${action('Event calendar','season','ghost small')}${action('Route & GPX','course','ghost small')}${action('Add event','addevent','ghost small')}</div>
+ <div class="panel"><div class="panel-heading"><div><h2>${e(ev.name)}</h2><p>${fmtDate(ev.date)} · ${e(ev.discipline)} · ${e(p.intensity)}</p></div><span class="badge ${e(ev.priority)}">${e(ev.priority)}-priority</span></div>
  <div class="strategy-metrics"><div class="strategy-metric"><small>Coach-estimated elapsed time</small><strong>${p.p.hours} h</strong><em>Range ${p.p.hoursLow}–${p.p.hoursHigh} h</em></div><div class="strategy-metric"><small>Expected average moving speed</small><strong>${p.p.expectedSpeed} km/h</strong><em>${e(p.confidence)} confidence · ${p.p.referenceCount} reference rides</em></div><div class="strategy-metric"><small>Carbohydrates</small><strong>${p.carbsPerHour} g/h</strong><em>${p.totalCarbs} g total · guidance ${p.carbRange[0]}–${p.carbRange[1]} g/h</em></div><div class="strategy-metric"><small>Fluids</small><strong>${p.fluidMlPerHour} ml/h</strong><em>${p.totalFluid} L total · starting range ${p.fluidRange[0]}–${p.fluidRange[1]} ml/h</em></div></div>
  <details class="rw-disclosure section-space"><summary>How the coach calculated this <span>Route, surface and pace assumptions</span></summary><div class="strategy-explain section-space"><strong>Why this estimate?</strong> ${e(p.p.assumptions)} ${usesRoute?`Route file covers ${p.p.km} km; pacing uses ${p.p.ascent} m climbing for the scenario.`:`Course uses the manually entered ${p.p.km} km and ${p.p.ascent} m ascent; add GPX to improve terrain assessment.`} Expected time includes a provisional ${p.p.stoppedMinutes} minutes for breaks. Speed estimates are not a guarantee; surface, tyres, wind, fitness and effort can change them markedly.</div>
  <div class="strategy-evidence section-space" style="background:#152b37;border:1px solid #355264;border-radius:10px;padding:12px"><strong>Route-demand assessment: ${e(p.p.difficulty)}</strong> · ${p.p.density} m climbing per kilometre · ${p.p.steepCount} steep GPX climbs (≥8% average).<div class="tiny section-space">The ride can be physically harder even if the predicted total time is shorter. Road, gravel, climbing and steepness now affect estimated speed separately. ${p.p.ascentConflict?`Entered ascent ${Math.round(p.p.enteredAscent)} m versus calculated GPX ascent ${Math.round(p.p.routeAscent)} m; higher figure used as a conservative scenario.`:`Ascent estimate ${Math.round(p.p.ascent)} m.`}</div></div>
@@ -850,28 +956,43 @@ function activities(){let rides=state.activities.slice().sort((a,b)=>b.date.loca
  <div class="section-space muted-note">Original FIT/TCX/GPX recordings are processed in your browser. No automatic Wahoo or Zwift sync is included. Export a JSON backup before importing many activities.</div></section>
  ${panel('CSV sample format',`<code style="font-size:11px;display:block;white-space:pre-wrap;color:#bce0df">date,title,duration_min,distance_km,ascent_m,avg_power,rpe\n2026-10-24,Gravel endurance,210,78,1100,155,6</code><div class="btnrow section-space">${action('Download CSV template','csvtemplate','secondary small')}</div>`)}`;
 }
+function athleteHome(){
+ const a=state.athlete, health=checkLevel(),rides=state.activities.slice().sort((x,y)=>y.date.localeCompare(x.date));
+ const recent=rides.filter(x=>daysBetween(x.date,iso(NOW()))>=0&&daysBetween(x.date,iso(NOW()))<=27);
+ const minutes=recent.reduce((sum,x)=>sum+n(x.duration),0);
+ return htmlHead('YOUR RIDER PROFILE','Athlete','Your rides, recovery and preferences in one place.')+
+ `<div class="athlete-intro"><span class="athlete-avatar" aria-hidden="true">${e(String(a.name||'R').charAt(0).toUpperCase())}</span><div><h2>${e(a.name||'Rider')}</h2><p>${e(a.discipline)} · ${n(a.weight)} kg · FTP reference ${n(a.ftp)||'—'} W${a.ftpVerified?' (recently verified)':' (historical)'}</p></div>${action('Edit profile','profile','secondary small')}</div>
+ <div class="today-stats athlete-stats"><div class="today-stat"><span>Last 28 days</span><strong>${round(minutes/60,1)} h</strong><p>${recent.length} recorded rides</p></div><button class="today-stat today-stat-button" data-act="recovery" type="button"><span>Recovery</span><strong>${e(health.level==='unknown'?'Check in':health.level==='good'?'On track':'Review needed')}</strong><p>${e(health.title)}</p></div><div class="today-stat"><span>Activity history</span><strong>${rides.length} rides</strong><p>${rides[0]?`Last ride ${fmtDate(rides[0].date)}`:'Import to get started'}</p></div></div>
+ <div class="athlete-links"><button type="button" class="athlete-link" data-act="activities"><span class="athlete-link-icon">↗</span><span><strong>Ride history</strong><small>Imported FIT rides, progress and fuelling notes</small></span><b>→</b></button>
+ <button type="button" class="athlete-link" data-act="recovery"><span class="athlete-link-icon">♡</span><span><strong>Recovery check-in</strong><small>How you feel, fatigue and recovery history</small></span><b>→</b></button>
+ <button type="button" class="athlete-link" data-act="profile"><span class="athlete-link-icon">⚙</span><span><strong>Profile & availability</strong><small>FTP reference, rider details and training days</small></span><b>→</b></button></div>
+ <details class="rw-disclosure section-space"><summary>Data & backup <span>Import, export and local storage</span></summary><div class="btnrow section-space">${action('Import FIT / TCX / GPX','importridefiles','secondary small')}${action('Export JSON backup','exportbackup','ghost small')}${action('Restore backup','importbackup','ghost small')}</div><p class="tiny">Your data remains in this browser. Exporting a backup is recommended before changing devices or browsers.</p></details>`;
+}
 function athlete(){let a=state.athlete;return htmlHead('Athlete profile','Make it fit your life.','Set a realistic weekly schedule, current performance reference and training preferences. These are starting inputs, not verified test results.')+
  `<div class="layout cols2"><section class="panel"><div class="panel-heading"><h2>Rider profile</h2><span class="badge">Local athlete</span></div><form id="athleteForm"><div class="form-grid"><div class="field"><label>Name or nickname</label><input name="name" value="${e(a.name)}" required maxlength="80"></div><div class="field"><label>Primary discipline</label><select name="discipline">${['Gravel & road','Gravel','Road','XC MTB','Enduro MTB','Time trial','Multi-discipline'].map(x=>`<option ${a.discipline===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Weight (kg)</label><input name="weight" type="number" min="30" max="250" step=".1" value="${a.weight}"></div><div class="field"><label>FTP reference (watts)</label><input name="ftp" type="number" min="40" max="650" value="${a.ftp}"></div><div class="field"><label>Recent typical training (hrs/week)</label><input name="baseHours" type="number" min="0" max="35" step=".5" value="${a.baseHours}"></div><div class="field"><label>Desired weekly training (hrs)</label><input name="targetHours" type="number" min="1" max="35" step=".5" value="${a.targetHours}"></div></div><label class="checkline"><input type="checkbox" name="ftpVerified" ${a.ftpVerified?'checked':''}> FTP has been recently tested/verified</label><div class="field"><label>Coaching notes / limitations</label><textarea name="notes">${e(a.notes)}</textarea></div><div class="section-space"><button class="btn" type="submit">Save rider profile</button></div></form></section>
  <section class="panel"><div class="panel-heading"><h2>Available time by day</h2><span class="badge">Minutes per day</span></div><form id="availabilityForm"><div class="form-grid">${DAY.map((day,i)=>`<div class="field"><label>${day}</label><input type="number" name="day${i}" min="0" max="480" step="5" value="${a.trainingDays[i]}"></div>`).join('')}</div><p class="help-copy">Enter realistic maximum minutes for each day, including cycling commutes if you intend to train during them. Zero means unavailable. Training prescriptions will not exceed these daily limits except the displayed event itself.</p><div class="section-space"><button class="btn" type="submit">Save availability & recalculate</button></div></form></section></div>
  <div class="layout cols2 section-space">${panel('Data & integrations',`<div class="event-row"><div class="event-main"><div class="event-name">Zwift workout export</div><div class="event-meta">Ready · .zwo structured workouts</div></div><span class="badge green">Available</span></div><div class="event-row"><div class="event-main"><div class="event-name">FIT / TCX / timed GPX activity import</div><div class="event-meta">Ready · Files processed locally in your browser</div></div><span class="badge green">Available</span></div><div class="event-row"><div class="event-main"><div class="event-name">CSV activity import</div><div class="event-meta">Ready · Your original activity files or authorised export</div></div><span class="badge green">Available</span></div><div class="event-row"><div class="event-main"><div class="event-name">Intervals.icu</div><div class="event-meta">Integration candidate · OAuth/server not configured</div></div><span class="badge">Not connected</span></div><div class="event-row"><div class="event-main"><div class="event-name">Strava API</div><div class="event-meta">Not offered · third-party AI restrictions</div></div><span class="badge warn">Restricted</span></div><div class="event-row"><div class="event-main"><div class="event-name">Zwift live activity sync</div><div class="event-meta">Not available in this offline trial</div></div><span class="badge">Not connected</span></div>`)}
  ${panel('Local data controls',`<p class="help-copy">All data remains in this browser's localStorage until you export it. Clearing site data, switching browsers or opening this file from another location may make the local copy unavailable. Export backups regularly.</p><div class="btnrow section-space">${action('Download JSON backup','exportbackup','')}${action('Restore JSON backup','importbackup','secondary')}${action('Reset sample trial','resettrial','danger')}</div><div class="muted-note section-space">This is a single-user evaluation build without accounts, hosted storage or encrypted cloud synchronisation. Avoid storing identifiable medical details on shared devices.</div>`)}</div>`;
 }
-function render(){let hash=(window.location.hash||'#dashboard').slice(1);if(NAV.some(x=>x[0]===hash))view=hash;
- const navLink=([id,ico,name])=>`<a class="nav-link ${view===id?'active':''}" href="#${id}" data-view="${id}"><span class="nav-ico">${ico}</span>${name}</a>`;
- const mainNav=['dashboard','training','strategy','recovery','activities'];
- const rest= NAV.filter(x=>!mainNav.includes(x[0]));
- document.getElementById('nav').innerHTML=NAV.filter(x=>mainNav.includes(x[0])).map(navLink).join('')+`<details class="nav-more" ${rest.some(x=>x[0]===view)?'open':''}><summary>More tools <span>⌄</span></summary>${rest.map(navLink).join('')}</details>`;
- document.getElementById('breadcrumb').innerHTML=`RideWeave <span>/ ${e(NAV.find(x=>x[0]===view)?.[2]||'Dashboard')}</span>`;
+function render(){
+ let hash=(window.location.hash||'#dashboard').slice(1);
+ const pages={dashboard,training,strategy,athlete:athleteHome,season,course,recovery,activities,profile:athlete};
+ if(Object.prototype.hasOwnProperty.call(pages,hash))view=hash;
+ const parent=routeParent(view);
+ const navLink=([id,ico,name],mobile=false)=>`<a class="${mobile?'dock-link':'nav-link'} ${parent===id?'active':''}" href="#${id}" data-view="${id}" ${parent===id?'aria-current="page"':''}><span class="${mobile?'dock-icon':'nav-ico'}" aria-hidden="true">${ico}</span><span>${name}</span></a>`;
+ document.getElementById('nav').innerHTML=NAV.map(x=>navLink(x)).join('');
+ document.getElementById('mobileDock').innerHTML=NAV.map(x=>navLink(x,true)).join('');
+ const back=SECONDARY_PAGES[view];
+ document.getElementById('breadcrumb').innerHTML=`${back?`<a href="#${parent}" data-view="${parent}">${e(routeLabel(parent))}</a><span>/ ${e(routeLabel(view))}</span>`:'RideWeave <span>/ '+e(routeLabel(view))+'</span>'}`;
  document.getElementById('topDate').textContent=NOW().toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
- let pages={dashboard,season,training,course,strategy,recovery,activities,athlete};document.getElementById('app').innerHTML=pages[view]();
+ document.getElementById('app').innerHTML=pages[view]();
  document.querySelector('.sidebar').classList.remove('open');
  if(view==='course'&&getCourse(currentEvent()))setTimeout(drawCourse,20);
  if(view==='strategy'){const ev=currentEvent(),id=ev?.id,eligible=RideWeaveEventIntel.forecastAvailability(ev);
-  if(id&&eligible.available&&!RideWeaveEventIntel.getCachedWeather(ev)&&!weatherLoading.has(id)&&!weatherFailures.has(id)){
-   weatherLoading.add(id);RideWeaveEventIntel.fetchWeather(ev,NOW(),state.activities).then(r=>{if(r.status!=='ok')weatherFailures.set(id,r.reason||'Forecast unavailable');}).catch(err=>weatherFailures.set(id,err.message||'Forecast unavailable')).finally(()=>{weatherLoading.delete(id);if(view==='strategy'&&currentEvent()?.id===id)render();});
-  }
- }
+ if(id&&eligible.available&&!RideWeaveEventIntel.getCachedWeather(ev)&&!weatherLoading.has(id)&&!weatherFailures.has(id)){
+ weatherLoading.add(id);RideWeaveEventIntel.fetchWeather(ev,NOW(),state.activities).then(r=>{if(r.status!=='ok')weatherFailures.set(id,r.reason||'Forecast unavailable');}).catch(err=>weatherFailures.set(id,err.message||'Forecast unavailable')).finally(()=>{weatherLoading.delete(id);if(view==='strategy'&&currentEvent()?.id===id)render();});}}
 }
+
 function showModal(title,body){document.querySelector('.modal-backdrop')?.remove();let div=document.createElement('div');div.className='modal-backdrop';div.innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-label="${e(title)}"><div class="modal-heading"><h2>${e(title)}</h2><button class="close" data-act="closemodal" aria-label="Close">×</button></div>${body}</div>`;div.addEventListener('click',ev=>{if(ev.target===div)div.remove()});document.body.appendChild(div);div.querySelector('input,select,button')?.focus()}
 function closeModal(){document.querySelector('.modal-backdrop')?.remove()}
 function eventModal(id){let ev=id?state.events.find(x=>x.id===id):null,x=ev||{name:'',date:'2027-06-01',discipline:'Gravel',distance:'',ascent:'',priority:'C',goal:'',source:'User entered',feedPoints:''};showModal(ev?'Edit event':'Add event',`<form id="eventForm"><input type="hidden" name="id" value="${e(ev?.id||'')}"><div class="form-grid"><div class="field"><label>Event name</label><input name="name" required maxlength="100" value="${e(x.name)}"></div><div class="field"><label>Date</label><input name="date" type="date" required value="${e(x.date)}"></div><div class="field"><label>Discipline</label><select name="discipline">${['Gravel','Road','XC MTB','Enduro MTB','Time trial','Other'].map(d=>`<option ${x.discipline===d?'selected':''}>${d}</option>`).join('')}</select></div><div class="field"><label>Priority</label><select name="priority">${['A','B','C'].map(p=>`<option ${x.priority===p?'selected':''} value="${p}">${p} — ${p==='A'?'Primary target':p==='B'?'Secondary':'Training event'}</option>`).join('')}</select></div><div class="field"><label>Event start time (if confirmed)</label><input name="startTime" type="time" value="${e(x.startTime||'')}"></div><div class="field"><label>Distance (km)</label><input name="distance" type="number" min="1" max="1000" step=".1" value="${x.distance??''}"></div><div class="field"><label>Ascent (m; if known)</label><input name="ascent" type="number" min="0" max="20000" value="${x.ascent??''}"></div><div class="field" style="grid-column:1/-1"><label>Personal objective</label><textarea name="goal">${e(x.goal)}</textarea></div><div class="field" style="grid-column:1/-1"><label>Route data provenance / notes</label><input name="source" value="${e(x.source)}"></div></div><div class="btnrow section-space"><button class="btn" type="submit">${ev?'Save changes':'Add to season'}</button>${ev?`<button class="btn danger" type="button" data-act="deleteevent" data-id="${e(ev.id)}">Delete event</button>`:''}</div></form>`)}
@@ -928,8 +1049,9 @@ document.addEventListener('click',async ev=>{
  let btn=ev.target.closest('[data-act]');if(!btn)return;let act=btn.dataset.act,date=btn.dataset.date,id=btn.dataset.id;
  switch(act){
  case 'closemodal':closeModal();break;
- case 'season':case 'training':case 'course':case 'strategy':case 'recovery':case 'athlete':case 'activities':view=act;window.location.hash=act;render();break;
- case 'addevent':eventModal();break;
+ case 'season':case 'training':case 'course':case 'strategy':case 'recovery':case 'athlete':case 'activities':case 'profile':view=act;window.location.hash=act;render();break;
+ case 'eventselect':setEvent(id);view='strategy';window.location.hash='strategy';render();break;
+  case 'addevent':eventModal();break;
  case 'editevent':eventModal(id);break;
  case 'setprimary':state.events.forEach(x=>{if(x.priority==='A')x.priority='B'});state.events.find(x=>x.id===id).priority='A';save();toast('Main event target updated.');render();break;
  case 'selectevent':setEvent(id);view='course';window.location.hash='course';render();break;
@@ -968,7 +1090,7 @@ document.addEventListener('click',async ev=>{
  let printDetails=[];
  window.addEventListener('beforeprint',()=>{printDetails=[...document.querySelectorAll('details.rw-disclosure:not([open])')];printDetails.forEach(x=>x.open=true)});
  window.addEventListener('afterprint',()=>{printDetails.forEach(x=>x.open=false);printDetails=[]});
-window.addEventListener('hashchange',()=>{let hash=location.hash.slice(1);if(NAV.some(x=>x[0]===hash)){view=hash;render()}});
+window.addEventListener('hashchange',()=>{let hash=location.hash.slice(1);if(NAV.some(x=>x[0]===hash)||SECONDARY_PAGES[hash]){view=hash;render()}});
 document.getElementById('menuToggle').addEventListener('click',()=>document.querySelector('.sidebar').classList.toggle('open'));
 document.getElementById('backupQuick').addEventListener('click',()=>{download('RideWeave_backup_'+iso(NOW())+'.json',JSON.stringify(state,null,2),'application/json');toast('Backup downloaded.')});
 document.addEventListener('change',ev=>{if(ev.target.id==='courseEvent'||ev.target.id==='strategyEvent')setEvent(ev.target.value)});
