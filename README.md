@@ -1,6 +1,15 @@
-# RideWeave v0.5.2 — More realistic route-aware event pacing
+# RideWeave v0.6 — Focused coaching interface
 
 Browser-based cycling coaching trial: https://simonedward88.github.io/rideweave-trial/
+
+## New in v0.6 — cleaner look and feel
+- **Today** screen prioritises the next workout and A-priority event, with recovery status and the next three events; optional baseline and route detail lives under an expandable section.
+- Five main navigation entries (**Today, Training, Events, Recovery, History**) and a **More tools** section for Season, Routes and Settings. No functionality removed.
+- Training calendar is displayed first. The coach's rationale and 16-week progression are expandable; rest days are quieter. Zwift-style power-zone colours and workout exports are unchanged.
+- Event Strategy highlights duration, speed, carbohydrate and fluid targets. Evidence, weather context, refill planning and scientific references expand on demand; important route/pacing warnings remain visible.
+- The dark interface uses fewer accent colours, quieter panel styling, more whitespace and shorter labels; tested at mobile and desktop widths.
+- Local browser storage key and backup format remain unchanged. The previous FTP, rides, events and recovery information remain on the user's device and are not uploaded to GitHub.
+- Print briefing expands all detailed sections temporarily, then restores the original display.
 
 ## Update in v0.5.2 — event-pace model
 - Corrected the earlier surface-agnostic pace calculation. Event estimates now distinguish **road**, **gravel**, and MTB terrain assumptions; climbing density and steep-climb counts separately reduce expected speeds.
